@@ -4,8 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIDOT AI Symposium — Intelligent Mobility</title>
+<meta name="description" content="RIDOT convenes state DOT leadership, engineers, planners, and researchers for two days on where artificial intelligence meets the real work of transportation. Aug 19–20, 2026 · NEIT, East Greenwich, RI.">
+<meta name="theme-color" content="#061a2e">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ridotaisymposium.org/">
+<meta property="og:title" content="RIDOT AI Symposium — Intelligent Mobility">
+<meta property="og:description" content="Two days on where artificial intelligence meets the real work of building, running, and maintaining transportation systems. Aug 19–20, 2026 · NEIT, East Greenwich, RI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23061a2e'/%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%235b98d1' stroke-width='2'/%3E%3Cpath d='M9 19.5 L14 11 L18 16.5 L23 9' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400..700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy-deep:#061a2e;
@@ -21,9 +29,12 @@
     --ink:#0e1f31;
     --ink-soft:#4d6072;
     --line:#d7e4ef;
-    --amber:#e7ecf2;
     --shadow: 0 12px 32px -16px rgba(10,44,77,0.35);
     --radius: 14px;
+    --font-display:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
+    --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+    --nav-offset:80px; /* sticky nav height + breathing room, for in-page jumps */
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -31,18 +42,18 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'Inter',sans-serif;
+    font-family:var(--font-body);
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,h4{
-    font-family:'Barlow Condensed',sans-serif;
+    font-family:var(--font-display);
     font-weight:700;
     letter-spacing:0.01em;
     margin:0;
   }
-  .mono{font-family:'IBM Plex Mono',monospace;}
+  .mono{font-family:var(--font-mono);}
   .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
+    font-family:var(--font-mono);
     font-size:0.72rem;
     letter-spacing:0.14em;
     text-transform:uppercase;
@@ -51,37 +62,6 @@
   }
   a{color:inherit;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
-
-  .speaker-links{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
-  .bio-toggle{cursor:pointer;}
-  .speaker-bio{
-    max-height:0; overflow:hidden; opacity:0;
-    transition:max-height .3s ease, opacity .25s ease, margin-top .3s ease;
-    font-size:0.85rem; color:var(--ink-soft); line-height:1.55;
-  }
-.speaker-bio.open{
-  max-height:400px; opacity:1; margin-top:12px;
-}
-
-.speaker-name-link{
-  color:inherit; text-decoration:none;
-  border-bottom:1.5px dashed;
-  border-bottom-color:var(--route);
-  transition:border-color .15s;
-}
-.speaker-name-link:hover{
-  border-bottom-color:var(--route);
-}  
-
-.stop-title-link{
-  color:inherit; text-decoration:none;
-  border-bottom:1.5px dashed;
-  border-bottom-color:var(--highway);
-  transition:border-color .15s;
-}
-.stop-title-link:hover{
-  border-bottom-color:var(--highway);
-}
 
   /* ===== Nav ===== */
   .nav{
@@ -93,18 +73,24 @@
   .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
   .nav-brand{display:flex;align-items:center;gap:10px;}
   .nav-mark{width:30px;height:30px;flex-shrink:0;}
-  .nav-brand-text{color:#fff;font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:0.02em;line-height:1.05;}
-  .nav-brand-text span{display:block;font-family:'IBM Plex Mono';font-size:0.62rem;letter-spacing:0.14em;color:var(--route-soft);font-weight:500;margin-top:2px;}
+  .nav-brand-text{color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:0.02em;line-height:1.05;}
+  .nav-brand-text span{display:block;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.14em;color:var(--route-soft);font-weight:500;margin-top:2px;}
   .nav-links{display:flex;gap:28px;}
   .nav-links a{
     color:rgba(255,255,255,0.78);
     font-size:0.86rem;
     text-decoration:none;
     font-weight:500;
+    white-space:nowrap;
     transition:color .15s;
   }
   .nav-links a:hover{color:#fff;}
-  @media (max-width:720px){.nav-links{display:none;}}
+  @media (max-width:720px){
+    :root{--nav-offset:104px;}
+    .nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:8px;}
+    .nav-links{width:100%;gap:22px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;}
+    .nav-links::-webkit-scrollbar{display:none;}
+  }
 
   /* ===== Hero ===== */
   .hero{
@@ -119,7 +105,7 @@
   .hero .wrap{position:relative;z-index:2;}
   .hero-eyebrow{
     display:inline-flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono';font-size:0.75rem;letter-spacing:0.16em;
+    font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.16em;
     color:var(--route-soft); text-transform:uppercase; font-weight:600;
     padding:6px 14px 6px 10px;border:1px solid rgba(91,152,209,0.4);
     border-radius:999px; margin-bottom:26px;
@@ -154,27 +140,29 @@
   .btn:hover{transform:translateY(-2px);}
   .btn-primary{background:#fff;color:var(--navy);}
   .btn-primary:hover{box-shadow:0 10px 24px -8px rgba(255,255,255,0.35);}
-  .btn-ghost{border-color:rgba(255,255,255,0.35);color:#fff;}
-  .btn-yellow{background: #F9B62A; color: #000}
+  .btn-yellow{background:#f9b62a;color:#000;}
+  .btn-register{margin-left:auto;}
 
   /* mile-sign strip */
   .mile-strip{
     margin-top:56px;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     border-top:1px solid rgba(255,255,255,0.14);
   }
-  .mile-strip.cols-3{grid-template-columns:repeat(3,1fr);}
-  
   .mile-item{
     padding:22px 8px 26px;
     border-right:1px solid rgba(255,255,255,0.14);
   }
   .mile-item:last-child{border-right:none;}
   .mile-item .mono{color:var(--route-soft);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;}
-  .mile-item strong{display:block;font-family:'Barlow Condensed';font-size:1.35rem;font-weight:600;color:#fff;line-height:1.15;}
+  .mile-item strong{display:block;font-family:var(--font-display);font-size:1.35rem;font-weight:600;color:#fff;line-height:1.15;}
   .mile-item small{display:block;color:rgba(230,240,250,0.65);font-size:0.82rem;margin-top:4px;}
-  @media (max-width:820px){.mile-strip{grid-template-columns:repeat(2,1fr);} .mile-item:nth-child(2){border-right:none;}}
+  @media (max-width:720px){
+    .mile-strip{grid-template-columns:1fr;}
+    .mile-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.14);padding:16px 0 18px;}
+    .mile-item:last-child{border-bottom:none;}
+  }
 
   /* dashed roadline divider */
   .roadline{
@@ -198,12 +186,18 @@
     display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
     background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
   }
-  .topic-card{background:#fff;padding:26px 24px;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;}
-  .topic-card .num{font-family:'IBM Plex Mono';font-size:0.78rem;color:var(--route);font-weight:600;}
-  .topic-card h4{font-size:1.28rem;color:var(--navy);margin-top:10px;line-height:1.15;font-weight:600;}
+  .topic-card{
+    background:#fff;padding:26px 24px;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;
+    color:inherit;text-decoration:none;transition:background .15s;
+  }
+  .topic-card:hover,.topic-card:focus-visible{background:var(--sky);}
+  .topic-card .num{display:flex;justify-content:space-between;gap:12px;font-family:var(--font-mono);font-size:0.78rem;color:var(--route);font-weight:600;}
+  .topic-when{color:var(--ink-soft);font-weight:500;}
+  .topic-card h4{font-size:1.28rem;color:var(--navy);margin-top:10px;line-height:1.15;font-weight:600;transition:color .15s;}
+  .topic-card:hover h4{color:var(--highway);}
   @media (max-width:900px){.topics-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:600px){.topics-grid{grid-template-columns:1fr;}}
-  .topics-note{margin-top:22px;font-size:0.92rem;color:var(--ink-soft);font-family:'IBM Plex Mono';letter-spacing:0.02em;}
+  .topics-note{margin-top:22px;font-size:0.92rem;color:var(--ink-soft);font-family:var(--font-mono);letter-spacing:0.02em;}
   .topics-note b{color:var(--highway);}
 
   /* ===== Speakers ===== */
@@ -216,29 +210,40 @@
   }
   .speaker-card.lead{padding:30px;}
   .speaker-photo{
-    flex-shrink:0; border-radius:50%; object-fit:cover; background:var(--sky-deep);
+    flex-shrink:0; border-radius:50%; background:var(--sky-deep);
     display:flex; align-items:center; justify-content:center; overflow:hidden;
   }
   .speaker-card.lead .speaker-photo{width:104px;height:104px;}
   .speaker-photo img{width:100%;height:100%;object-fit:cover;display:block;}
   .speaker-initials{
     width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-    font-family:'Barlow Condensed';font-weight:700;color:#fff;
+    font-family:var(--font-display);font-weight:700;color:#fff;
   }
   .speaker-card.lead .speaker-initials{font-size:2.1rem;}
   .speaker-info{min-width:0;}
-  .speaker-eyebrow{font-family:'IBM Plex Mono';font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route);font-weight:600;margin-bottom:4px;display:block;}
-  .speaker-name{font-family:'Barlow Condensed';font-weight:700;line-height:1.1;color:var(--navy);}
+  .speaker-eyebrow{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route);font-weight:600;margin-bottom:4px;display:block;}
+  .speaker-name{font-family:var(--font-display);font-weight:700;line-height:1.1;color:var(--navy);}
   .speaker-card.lead .speaker-name{font-size:1.7rem;}
+  .speaker-name-link{color:inherit;text-decoration:none;border-bottom:1.5px dashed var(--route);}
   .speaker-role{color:var(--ink-soft);font-size:0.88rem;margin-top:4px;line-height:1.4;}
   .speaker-org{color:var(--ink);font-weight:600;font-size:0.88rem;}
+  .speaker-links{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
   .speaker-link{
     display:inline-flex; align-items:center; gap:5px; margin-top:10px;
-    font-family:'IBM Plex Mono'; font-size:0.72rem; letter-spacing:0.04em;
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.04em;
     color:var(--route); text-decoration:none; font-weight:600;
     border-bottom:1px solid transparent;
   }
   .speaker-link:hover{border-bottom-color:var(--route);}
+  .bio-toggle{background:none;border-top:0;border-left:0;border-right:0;padding:0;line-height:inherit;cursor:pointer;}
+  /* grid-template-rows 0fr→1fr animates to the bio's natural height (no max-height cap to clip long bios) */
+  .speaker-bio{
+    display:grid; grid-template-rows:0fr; opacity:0; visibility:hidden;
+    transition:grid-template-rows .3s ease, opacity .25s ease, margin-top .3s ease, visibility .3s;
+    font-size:0.85rem; color:var(--ink-soft); line-height:1.55; white-space:pre-line;
+  }
+  .speaker-bio > div{overflow:hidden;}
+  .speaker-bio.open{grid-template-rows:1fr; opacity:1; visibility:visible; margin-top:12px;}
   .speakers-grid{
     display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
     background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
@@ -262,15 +267,15 @@
   /* ===== Day tabs ===== */
   .day-tabs{display:flex;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
   .day-tab{
-    font-family:'Barlow Condensed';font-weight:600;font-size:1.05rem; 
+    font-family:var(--font-display);font-weight:600;font-size:1.05rem;
     background:#fff;border:1.5px solid var(--line);color:var(--ink-soft);
     padding:14px 22px;border-radius:999px;cursor:pointer;
     display:flex;flex-direction:column;align-items:flex-start;gap:2px;
-    transition:all .15s; min-width:210px;
+    transition:background .15s, border-color .15s, color .15s; min-width:210px;
   }
-  .day-tab span{font-family:'IBM Plex Mono';font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color: var(--ink-soft);}
-  .day-tab.active{background:var(--navy);border-color:var(--navy);color:#fff;}
-  .day-tab.active span{color:#fff;}
+  .day-tab span{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color:var(--ink-soft);}
+  .day-tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .day-tab[aria-selected="true"] span{color:#fff;}
   .day-intro{color:var(--ink-soft);font-size:1rem;line-height:1.6;max-width:680px;margin:22px 0 46px;padding-left:18px;border-left:3px solid var(--route);}
 
   /* ===== Route / timeline ===== */
@@ -279,15 +284,15 @@
     content:"";position:absolute;left:22px;top:6px;bottom:6px;width:2px;
     background:repeating-linear-gradient(180deg, var(--route) 0 10px, transparent 10px 18px);
   }
-  .stop{position:relative;margin-bottom:22px;}
+  .stop{position:relative;margin-bottom:22px;scroll-margin-top:var(--nav-offset);}
   .stop-badge{
     position:absolute; left:-64px; top:0; width:46px;height:46px;border-radius:50%;
     background:var(--navy); color:#fff; display:flex;align-items:center;justify-content:center;
-    font-family:'IBM Plex Mono';font-size:0.66rem;font-weight:600; text-align:center; line-height:1.15;
+    font-family:var(--font-mono);font-size:0.66rem;font-weight:600; text-align:center; line-height:1.15;
     box-shadow:0 0 0 5px #fff, 0 0 0 6px var(--line);
     padding:2px;
   }
-  .stop.type-break .stop-badge{background:var(--sky-deep);color:var(--slate);box-shadow:0 0 0 5px #fff, 0 0 0 6px var(--line);}
+  .stop.type-break .stop-badge{background:var(--sky-deep);color:var(--slate);}
   .stop-card{
     background:#fff;border:1px solid var(--line);border-radius:var(--radius);
     padding:24px 26px; box-shadow:var(--shadow);
@@ -296,10 +301,11 @@
     box-shadow:none; padding:16px 22px; background:var(--sky);
     display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
   }
-  .stop.type-break .stop-card h4{font-size:1.05rem;color:var(--slate);font-weight:600;font-family:'Inter';}
-  .stop-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+  .stop.type-break .stop-card h4{font-size:1.05rem;color:var(--slate);font-weight:600;font-family:var(--font-body);}
+  .stop-break-note{font-weight:400;color:var(--ink-soft);}
+  .stop-top{margin-bottom:10px;}
   .pill{
-    font-family:'IBM Plex Mono';font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
+    font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
     font-weight:600;padding:5px 11px;border-radius:999px;color:#fff;white-space:nowrap;
   }
   .pill-keynote{background:var(--navy-deep);}
@@ -308,7 +314,8 @@
   .pill-case{background:var(--teal);}
   .pill-roundtable{background:var(--slate);}
   .pill-general{background:var(--ink-soft);}
-  .stop-card h3{font-size:1.5rem;color:var(--navy);line-height:1.15;font-weight:700;}
+  .stop-card h3{font-size:1.5rem;color:var(--navy);line-height:1.15;font-weight:700;margin-top:10px;}
+  .stop-title-link{color:inherit;text-decoration:none;border-bottom:1.5px dashed var(--highway);}
   .stop-mod{font-size:0.86rem;color:var(--ink-soft);margin-top:6px;}
   .stop-mod b{color:var(--ink);font-weight:600;}
   .stop-speakers{
@@ -318,13 +325,12 @@
     font-size:0.82rem;background:var(--sky);color:var(--navy);border:1px solid var(--sky-deep);
     padding:5px 12px;border-radius:8px;
   }
-  .speaker-chip b{font-weight:600;}
   .stop-desc{color:var(--ink-soft);font-size:0.94rem;line-height:1.62;}
   .stop-desc p{margin:0 0 10px;}
   .stop-desc p:last-child{margin-bottom:0;}
   .stop-format{
     margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
-    font-family:'IBM Plex Mono';font-size:0.76rem;color:var(--route);
+    font-family:var(--font-mono);font-size:0.76rem;color:var(--route);
   }
   .stop-note{
     margin-top:12px;font-size:0.82rem;color:var(--ink-soft);font-style:italic;
@@ -333,29 +339,28 @@
   @media (max-width:640px){
     .route{padding-left:52px;}
     .stop-badge{left:-52px;width:38px;height:38px;font-size:0.58rem;}
+    .pill{display:inline-block;white-space:normal;line-height:1.4;border-radius:12px;}
   }
 
-  /* ===== Logistics ===== */
+  /* ===== Organizing team ===== */
   .logi-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
   .logi-col{background:#fff;padding:32px 30px;}
-  .logi-col h4{font-family:'Barlow Condensed';font-size:1.3rem;color:var(--navy);margin-bottom:14px;}
+  .logi-col h4{font-size:1.3rem;color:var(--navy);margin-bottom:14px;}
   .logi-col h4.spaced{margin-top:26px;}
   .logi-col ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:0.92rem;line-height:1.75;}
-  .logi-col p{color:var(--ink-soft);font-size:0.92rem;line-height:1.7;margin:0 0 8px;}
   @media (max-width:820px){.logi-grid{grid-template-columns:1fr;}}
 
-  /* ===== Venue / audience strip ===== */
-  .info-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:52px;}
+  /* ===== Venue ===== */
+  .info-strip{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:52px;}
   .info-card{background:#fff;padding:28px 26px;}
   .info-card .eyebrow{display:block;margin-bottom:10px;}
   .info-card p{color:var(--ink-soft);font-size:0.92rem;line-height:1.6;margin:0;}
   .info-card a.map-link{display:inline-block;margin-top:10px;color:var(--route);font-weight:600;font-size:0.88rem;text-decoration:none;border-bottom:1px solid var(--route);}
-  @media (max-width:820px){.info-strip{grid-template-columns:1fr;}}
 
   /* ===== Footer ===== */
   footer{background:var(--navy-deep);color:rgba(255,255,255,0.7);padding:48px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  footer .foot-brand{color:#fff;font-family:'Barlow Condensed';font-weight:700;font-size:1.1rem;}
+  footer .foot-brand{color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.1rem;}
   footer small{font-size:0.8rem;}
 </style>
 </head>
@@ -364,7 +369,7 @@
 <nav class="nav">
   <div class="wrap">
     <div class="nav-brand">
-      <svg class="nav-mark" viewBox="0 0 32 32" fill="none">
+      <svg class="nav-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <circle cx="16" cy="16" r="15" stroke="#5b98d1" stroke-width="2"/>
         <path d="M8 20 L14 10 L18 16 L24 8" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
@@ -387,9 +392,9 @@
     <p class="hero-sub">RIDOT convenes state DOT leadership, engineers, planners, and researchers for two days on the road ahead — where artificial intelligence meets the real work of building, running, and maintaining transportation systems.</p>
     <div class="hero-cta">
       <a href="#program" class="btn btn-primary">View the Program →</a>
-      <a href="https://publicinput.com/RIDOTAISymposium" class="btn btn-yellow btn-register" style="margin-left:auto;">Registration →</a>
+      <a href="https://publicinput.com/RIDOTAISymposium" class="btn btn-yellow btn-register">Registration →</a>
     </div>
-    <div class="mile-strip cols-3">
+    <div class="mile-strip">
       <div class="mile-item"><span class="mono">Dates</span><strong>Aug 19–20, 2026</strong><small>2 full days</small></div>
       <div class="mile-item"><span class="mono">Location</span><strong>NEIT · East Greenwich</strong><small>1 New England Tech Blvd, RI 02818</small></div>
       <!-- div class="mile-item"><span class="mono">Attendees</span><strong>100+</strong><small>State DOTs, FHWA, industry, academia</small></div -->
@@ -399,6 +404,7 @@
   <div class="roadline"></div>
 </header>
 
+<main>
 <section id="speakers">
   <div class="wrap">
     <div class="section-head">
@@ -419,20 +425,8 @@
       <h2>Key topics on the agenda</h2>
       <p>Twelve conversations spanning governance, safety, operations, and the future of asset management — all through the lens of AI in the road and mobility sector.</p>
     </div>
-    <div class="topics-grid">
-      <div class="topic-card"><span class="num">01</span><h4>The Road Ahead: AI as the New Infrastructure</h4></div>
-      <div class="topic-card"><span class="num">02</span><h4>Governance Frameworks for Successful AI Development &amp; Deployment</h4></div>
-      <div class="topic-card"><span class="num">03</span><h4>AI for Proactive Road Safety</h4></div>
-      <div class="topic-card"><span class="num">04</span><h4>Optimizing ITS &amp; Mobility Systems with AI</h4></div>
-      <div class="topic-card"><span class="num">05</span><h4>Real-World AI Deployment: Lessons Learned from US and International AI Deployments</h4></div>
-      <div class="topic-card"><span class="num">06</span><h4>Getting Started: Building an AI Strategy</h4></div>
-      <div class="topic-card"><span class="num">07</span><h4>Mobility 2040: AI's Role in Next-Gen Transport</h4></div>
-      <div class="topic-card"><span class="num">08</span><h4>AI in Planning and Project Development</h4></div>
-      <div class="topic-card"><span class="num">09</span><h4>AI in Asset Management: Predictive Maintenance and Inspection</h4></div>
-      <div class="topic-card"><span class="num">10</span><h4>From Data to Digital Twins: The Future of Asset Management</h4></div>
-      <div class="topic-card"><span class="num">11</span><h4>Data Analytics &amp; Fusion: Unlocking Mobility Insights</h4></div>
-      <div class="topic-card"><span class="num">12</span><h4>AV &amp; AI Integration: Impacts to Existing Infrastructure</h4></div>
-    </div>
+    <!-- Cards are generated from the sessions in DATA that have a `topic` field (see script below). -->
+    <div class="topics-grid" id="topics-grid"></div>
     <p class="topics-note">Cross-cutting across all sessions — <b>Workforce</b></p>
   </div>
 </section>
@@ -445,16 +439,19 @@
       <p>Day 1 covers the current state of AI implementation — safety and system performance. Day 2 shifts to maintenance, longevity, and the strategic role of AI in long-term planning.</p>
     </div>
 
-    <div class="day-tabs">
-      <button class="day-tab active" data-day="1" onclick="showDay(1)">Day 1 <span>Wed, Aug 19 · Foundations, Safety, and System Performance</span></button>
-      <button class="day-tab" data-day="2" onclick="showDay(2)">Day 2 <span>Thu, Aug 20 · Asset Management, Planning, and Future Strategy</span></button>
+    <div class="day-tabs" role="tablist" aria-label="Program day">
+      <button type="button" class="day-tab" role="tab" id="day1-tab" data-day="1" aria-selected="true" aria-controls="day1-panel">Day 1 <span>Wed, Aug 19 · Foundations, Safety, and System Performance</span></button>
+      <button type="button" class="day-tab" role="tab" id="day2-tab" data-day="2" aria-selected="false" aria-controls="day2-panel">Day 2 <span>Thu, Aug 20 · Asset Management, Planning, and Future Strategy</span></button>
     </div>
 
-    <p id="day1-intro" class="day-intro">Day 1 focuses on the current state of AI implementation, addressing critical areas like road safety and optimizing system performance (ITS and mobility). MC: Pam Cotter and/or Dan DiBiasio.</p>
-    <p id="day2-intro" class="day-intro" style="display:none;">Day 2 shifts focus to the maintenance, longevity, and future development of road and mobility assets, and the strategic role of AI in long-term planning. MC: Pam Cotter and/or Dan DiBiasio.</p>
-
-    <div id="day1" class="route"></div>
-    <div id="day2" class="route" style="display:none;"></div>
+    <div class="day-panel" role="tabpanel" id="day1-panel" data-day="1" aria-labelledby="day1-tab">
+      <p class="day-intro">Day 1 focuses on the current state of AI implementation, addressing critical areas like road safety and optimizing system performance (ITS and mobility). MC: Pam Cotter and/or Dan DiBiasio.</p>
+      <div id="day1" class="route"></div>
+    </div>
+    <div class="day-panel" role="tabpanel" id="day2-panel" data-day="2" aria-labelledby="day2-tab" hidden>
+      <p class="day-intro">Day 2 shifts focus to the maintenance, longevity, and future development of road and mobility assets, and the strategic role of AI in long-term planning. MC: Pam Cotter and/or Dan DiBiasio.</p>
+      <div id="day2" class="route"></div>
+    </div>
   </div>
 </section>
 
@@ -497,7 +494,7 @@
       </div>
     </div>
 
-    <div class="info-strip" id="venue" style="grid-template-columns:1fr;">
+    <div class="info-strip" id="venue">
       <div class="info-card">
         <span class="eyebrow">Venue</span>
         <p><strong>New England Institute of Technology</strong><br>East Greenwich Campus<br>1 New England Tech Blvd, East Greenwich, RI 02818</p>
@@ -506,6 +503,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
@@ -515,6 +513,136 @@
 </footer>
 
 <script>
+/* ===== Speakers =====
+   photo: square image in pics/ (256×256 WebP keeps the page light)
+   bio:   plain-text file in bios/, loaded when "Bio" is clicked
+   link:  LinkedIn or other profile URL (omit if none) */
+const LEAD_SPEAKERS = [
+  {name:"Sean McMaster", role:"Administrator", org:"FHWA", eyebrow:"Opening Keynote — Day 1",
+   photo:"pics/Sean-McMaster.webp",
+   link:"https://highways.dot.gov/about/administrator", linkLabel:"FHWA Biography"},
+  {name:"Seval Oz", role:"Assistant Secretary for Research & Technology", org:"USDOT", eyebrow:"Opening Keynote — Day 2",
+   photo:"pics/Seval-Oz.webp",
+   link:"https://www.linkedin.com/in/sevaloz/"}
+];
+
+const OTHER_SPEAKERS = [
+  {name:"Sophie Abo", org:"VOLPE", bio:"bios/Sophie-Abo.txt", link:"https://www.linkedin.com/in/sophieabo/", photo:"pics/Sophie-Abo.webp"},
+  {name:"Mehrshad Amini", org:"URI", bio:"bios/Mehrshad-Amini.txt", link:"https://www.linkedin.com/in/mehrshad-amini-56ba7389/", photo:"pics/Mehrshad-Amini.webp"},
+  {name:"Justin Bruner", org:"PennDOT", link:"https://www.linkedin.com/in/justin-bruner-33b81594/", photo:"pics/Justin-Bruner.webp"},
+  {name:"Laura Chace", org:"ITS America", bio:"bios/Laura-Chace.txt", link:"https://www.linkedin.com/in/laurademeochace/", photo:"pics/Laura-Chace.webp"},
+  {name:"Gregory Ciparelli", org:"CT DOT", link:"https://www.linkedin.com/in/gregory-ciparelli-0322b319a/", photo:"pics/Gregory-Ciparelli.webp"},
+  {name:"Pam Cotter", org:"RIDOT", link:"https://www.linkedin.com/in/prcotter/", photo:"pics/Pam-Cotter.webp"},
+  {name:"Matt Cuddy", org:"VOLPE", bio:"bios/Matt-Cuddy.txt", link:"https://www.linkedin.com/in/mattcuddy/", photo:"pics/Matt-Cuddy.webp"},
+  {name:"Matthew Deal", org:"ESRI", link:"https://www.linkedin.com/in/msdeal/", photo:"pics/Matthew-Deal.webp"},
+  // {name:"Dan DiBiasio", org:"RIDOT", link:"https://www.linkedin.com/in/daniel-dibiasio-62b189105/"},
+  {name:"Lawrence Dwyer", org:"AASHTO", link:"https://www.linkedin.com/in/lawrence-dwyer-b56902288/", photo:"pics/Lawrence-Dwyer.webp"},
+  {name:"Scott Gausland", org:"RIDOT", bio:"bios/Scott-Gausland.txt", link:"https://www.linkedin.com/in/scott-gausland-74143785/", photo:"pics/Scott-Gausland.webp"},
+  {name:"Donovan Guin", org:"IBM", bio:"bios/Donovan-Guin.txt", link:"https://www.linkedin.com/in/dguin/", photo:"pics/Donovan-Guin.webp"},
+  {name:"Thomas Gruenstaeudl", org:"ASFINAG", bio:"bios/Thomas-Gru.txt", photo:"pics/Thomas-Gruenstaeudl.webp"},
+  {name:"Arnulf Hagen", org:"AIDALOS", bio:"bios/Arnulf-Hagen.txt", link:"https://www.linkedin.com/in/arnulfhagen/", photo:"pics/Arnulf-Hagen.webp"},
+  {name:"Patricia Hendren", org:"TETC", link:"https://www.linkedin.com/in/trish-hendren-transportation/", photo:"pics/Patricia-Hendren.webp"},
+  {name:"Scott Hensley", org:"IBM", bio:"bios/Scott-Hensley.txt", link:"https://www.linkedin.com/in/scottphensley/", photo:"pics/Scott-Hensley.webp"},
+  {name:"Tim Henry", org:"RIC", bio:"bios/Timothy-Henry.txt", link:"https://www.linkedin.com/in/timothy-henry311/", photo:"pics/Tim-Henry.webp"},
+  {name:"Katherine Kortum", org:"TRB", link:"https://www.linkedin.com/in/katherine-kortum-phd-pe-94530410/", photo:"pics/Katherine-Kortum.webp"},
+  {name:"Mac Lang", org:"VOLPE", bio:"bios/Mac-Lang.txt", link:"https://www.linkedin.com/in/mac-lang/", photo:"pics/Mac-Lang.webp"},
+  {name:"Charles Major", org:"MassDOT", link:"https://www.linkedin.com/in/charles-major-17409998/", photo:"pics/Charles-Major.webp"},
+  {name:"Justin O'Daniel", org:"Databricks", bio:"bios/Justin-ODaniel.txt", link:"https://www.linkedin.com/in/justin-o-daniel-755048156/", photo:"pics/Justin-ODaniel.webp"},
+  {name:"Hyun-A Park", org:"Spy Pond Partners, LLC", link:"https://www.linkedin.com/in/hyun-a-park-9106551/", photo:"pics/Hyun-A-Park.webp"},
+  {name:"Lisa Randall", org:"USDOT", bio:"bios/Lisa-Randall.txt", link:"https://www.linkedin.com/in/lisa-randall-097b6162/", photo:"pics/Lisa-Randall.webp"},
+  {name:"Robert Rocchio", org:"RIDOT", link:"https://www.linkedin.com/in/robert-rocchio-b8889425/", photo:"pics/Robert-Rocchio.webp"},
+  {name:"Jocelyn Stein", org:"MnDOT", bio:"bios/Jocelyn-Stein.txt", link:"https://www.linkedin.com/in/jocelyn-stein-pmp-4080755/", photo:"pics/Jocelyn-Stein.webp"},
+  {name:"Grace Sammartino", org:"ESRI", link:"https://www.linkedin.com/in/grsamm/", photo:"pics/Grace-Sammartino.webp"},
+  {name:"Robert Sheehan", org:"FHWA", link:"https://www.linkedin.com/in/robert-sheehan-4343523/", photo:"pics/Robert-Sheehan.webp"},
+  {name:"Mike Snodgrass", org:"Google", bio:"bios/Mike-Snodgrass.txt", link:"https://www.linkedin.com/in/misnodgrass/", photo:"pics/Mike-Snodgrass.webp"},
+  {name:"Craig Thor", org:"FHWA", link:"https://www.linkedin.com/in/craig-thor-46a838120/", photo:"pics/Craig-Thor.webp"},
+  {name:"Derek Torrey", org:"FHWA", bio:"bios/Derek-Torrey.txt", link:"https://www.linkedin.com/in/derektorrey/", photo:"pics/Derek-Torrey.webp"},
+  {name:"Giri Venkiteela", org:"NJ DOT", bio:"bios/Giri-Venkiteela.txt", link:"https://www.linkedin.com/in/giri-venkiteela-a375261b/", photo:"pics/Giri-Venkiteela.webp"},
+  {name:"Jennifer Volkening", org:"Utah DOT", bio:"bios/Jennifer-Volkening.txt", link:"https://www.linkedin.com/in/jennifer-volkening-4ba8751/", photo:"pics/Jennifer-Volkening.webp"},
+  {name:"Alexander Walcher", org:"ASFINAG", link:"https://www.linkedin.com/in/alexander-walcher-978051153/", photo:"pics/Alexander-Walcher.webp"},
+  {name:"Christos Xenophontos", org:"RIDOT", bio:"bios/Christos-Xenophontos.txt", link:"https://www.linkedin.com/in/christos-xenophontos-29b21914/", photo:"pics/Christos-Xenophontos.webp"},
+  {name:"Henry Young", org:"NEIT", bio:"bios/Henry-Young.txt", photo:"pics/Henry-Young.webp"},
+  {name:"Prof. Jinhua Zhao", org:"MIT", bio:"bios/Jinhua-Zhao.txt", link:"https://www.linkedin.com/in/jinhuazhao", photo:"pics/Jinhua-Zhao.webp"}
+];
+
+/* ===== Program =====
+   type:  keynote | panel | technical | case | roundtable | general | break
+   topic: true → listed under "Key topics" using the session title; a string → listed with that shorter title
+   note:  shown after the title on breaks, or as a callout on sessions */
+const DATA = {
+  1: [
+    {time:"8:00 AM", type:"general", label:"Registration", title:"Welcome Coffee &amp; Check-in", desc:["Sponsored by NEIT"]},
+    {time:"8:45 AM", type:"general", label:"Welcome", title:"Greetings &amp; Welcoming Remarks", speakers:["Derek Torrey, FHWA", "Henry Young, NEIT", "Robert Rocchio, RIDOT"]},
+    {time:"9:00 AM", type:"keynote", label:"Keynote &amp; Fireside Chat", title:"The Road Ahead: AI as the New Infrastructure", topic:true,
+      moderator:"Pam Cotter, RIDOT", speakers:["Sean McMaster, Administrator (FHWA)"],
+      desc:["Setting the stage for the symposium, this opening keynote and fireside conversation will discuss the paradigm shift that AI brings to the transportation sector, from Vision Zero to seamless mobility.",
+            "It will further explore how artificial intelligence and digital infrastructure are reshaping the core mission of transportation agencies, from advancing Vision Zero safety goals to enabling seamless, multimodal mobility, and how public agencies must transition from reactive management to proactive, data-driven stewardship."],
+      format:"5' Introduction · 10–15' Keynote · 25–30' Fireside chat"},
+    {time:"9:45 AM", type:"panel", label:"Panel Discussion 1", title:"Governance Frameworks for Successful AI Development and Deployment in Transportation",
+      topic:"Governance Frameworks for Successful AI Development &amp; Deployment",
+      moderator:"Lawrence Dwyer, AASHTO", speakers:["Scott Gausland, State of Rhode Island ETSS", "Jocelyn Stein, MnDOT", "Lisa Randall, USDOT ITS JPO", "Matt Cuddy, VOLPE", "Laura Chace, ITS America"],
+      desc:["This multi-stakeholder panel will discuss the emerging need for industry-wide standards, procurement guidance, and regulatory frameworks and draw on lessons learned from early adopters and discuss how state DOTs can build internal governance structures to manage AI risk.",
+            "It will further examine the policy, legal, and ethical guardrails needed to deploy AI responsibly in public infrastructure and will look to address data privacy and ownership, algorithmic bias and fairness in automated decision-making, and liability and accountability when AI-informed decisions affect public safety."]},
+    {time:"10:45 AM", type:"break", label:"Break", title:"Coffee Break"},
+    {time:"11:00 AM", type:"technical", label:"Technical Session 1", title:"AI for Proactive Road Safety", topic:true,
+      moderator:"Lawrence Dwyer, AASHTO", speakers:["Gregory Ciparelli, CT DOT", "Mac Lang, VOLPE", "Katherine Kortum, TRB"],
+      desc:["Technical Session 1 will explore how deep learning and computer vision are shifting road safety from reactive to proactive. Topics will include real-time crash prediction models that flag high-risk conditions before incidents occur, behavioral analysis of drivers, cyclists, and pedestrians to identify near-miss patterns, and AI-driven adaptive traffic control that adjusts signal timing and warnings based on live safety risk.",
+            "Presenters will share case examples of how these tools are being piloted to reduce fatalities and serious injuries on state and local roadway networks."]},
+    {time:"12:00 PM", type:"break", label:"Lunch &amp; Networking", title:"Lunch on your own"},
+    {time:"1:15 PM", type:"technical", label:"Technical Session 2", title:"Optimizing ITS and Mobility Systems with AI",
+      topic:"Optimizing ITS &amp; Mobility Systems with AI",
+      moderator:"Laura Chace, ITS America", speakers:["Lawrence Dwyer, AASHTO", "Jinhua Zhao, MIT", "Donovan Guin, IBM"],
+      desc:["Technical Session 2 will deep dive into how AI is optimizing Intelligent Transportation Systems (ITS) and mobility networks. Speakers will cover adaptive traffic signal control that responds to real-time conditions, predictive congestion management that anticipates bottlenecks before they form, and machine learning applications that improve the efficiency, reliability, and rider experience of shared and autonomous mobility services.",
+            "The session will highlight how these tools can be integrated into existing ITS infrastructure with measurable performance gains."]},
+    {time:"2:15 PM", type:"case", label:"Case Study Showcase 1", title:"Real-World AI Deployment: Lessons Learned from US and International AI Deployments", topic:true,
+      moderator:"Patricia Hendren, TETC", pres:"pres/Thomas-Gru.pdf", speakers:["Thomas Gruenstaeudl, ASFINAG (Austria)", "Jennifer Volkening, Utah DOT", "Jinhua Zhao, MIT"],
+      desc:["A showcase of real-world lessons from transportation agencies that have moved AI projects from pilot to implementation. Presenters will share case studies that cover project scope, implementation challenges, procurement and vendor management, measured outcomes, and lessons learned and will share their view on what successful AI deployment looks like and what pitfalls to avoid."]},
+    {time:"3:15 PM", type:"break", label:"Break", title:"Coffee Break"},
+    {time:"3:30 PM", type:"roundtable", label:"Peer Roundtable 1", title:"Getting Started: Building an AI Strategy", topic:true,
+      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:["Alexander Walcher, ASFINAG (Austria)", "Giri Venkiteela, NJ DOT", "Robert Sheehan, FHWA", "Mike Snodgrass, Google"],
+      desc:["An interactive, discussion-based roundtable for agencies at the early stages of AI adoption, focused on the foundational steps required to launch an agency-wide AI strategy.",
+            "Peers will discuss practical first steps: identifying high-value use cases, auditing and collecting the data needed to support AI models, addressing data quality and interoperability gaps, and securing organizational buy-in and funding."]},
+    {time:"4:30 PM", type:"general", label:"Wrap-Up", title:"Key Takeaways from Day 1 and Day 2 Look Ahead",
+      speakers:["Hyun-A Park", "Pam Cotter (Day 2 Look Ahead and Exhibition)"]},
+    {time:"5:00 PM", type:"break", label:"Reception", title:"Exhibition and Networking Reception", note:"Sponsored by ESRI"}
+  ],
+  2: [
+    {time:"8:00 AM", type:"general", label:"Registration", title:"Welcome Coffee &amp; Check-in", desc:["Sponsored by NEIT"]},
+    {time:"8:45 AM", type:"general", label:"Welcome", title:"Greetings &amp; Welcoming Remarks", speakers:["Henry Young, NEIT", "Christos Xenophontos, RIDOT"]},
+    {time:"9:00 AM", type:"keynote", label:"Keynote &amp; Fireside Chat — Future Vision", title:"Mobility 2040: AI's Role in Next-Gen Transport", topic:true,
+      moderator:"Christos Xenophontos, RIDOT", speakers:["Seval Oz, Assistant Secretary for Research &amp; Technology (USDOT)"],
+      desc:["This future-focused keynote and fireside chat will look ahead to Mobility 2040 and the disruptive technologies, from connected and autonomous vehicles to AI-orchestrated multimodal networks, that will define the next generation of transportation.",
+            "The fireside chat will further explore AI&#39;s foundational role in managing increasingly complex mobility ecosystems and will challenge attendees to think beyond incremental improvements toward a long-term vision for how AI can reshape statewide transportation planning and operations over the next two decades."],
+      format:"5' Introduction · 10–15' Keynote · 25–30' Fireside chat"},
+    {time:"9:45 AM", type:"technical", label:"Technical Session 3", title:"AI in Planning and Project Development", topic:true,
+      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:["Gregory Ciparelli, CT DOT", "Sophie Abo, VOLPE", "Grace Sammartino, ESRI"],
+      desc:["This session will examine how generative AI and optimization models are transforming transportation planning and project delivery. Presenters will showcase how AI enhances digital project delivery, BIM-to-field execution, and schedule/cost risk forecasting during construction and will demonstrate how these tools can compress planning timelines while improving the quality of decision-making."]},
+    {time:"10:45 AM", type:"break", label:"Break", title:"Coffee Break"},
+    {time:"11:00 AM", type:"technical", label:"Technical Session 4", title:"AI in Asset Management: Predictive Maintenance and Inspection", topic:true,
+      moderator:"Christopher Baxter, URI", speakers:["Donovan Guin &amp; Scott Hensley, IBM", "Arnulf Hagen, AIDALOS", "Mehrshad Amini, URI"],
+      desc:["Presenters in this session will cover how AI is facilitating the shifting from reactive repairs to predictive maintenance and how computer vision and machine learning are automating infrastructure inspection and maintenance planning.",
+            "The session will cover AI-enabled automated condition assessments, coupled with machine learning models that prioritize and optimize maintenance schedules based on condition and risk—extending asset life while reducing inspection costs and field labor demands."]},
+    {time:"12:00 PM", type:"break", label:"Lunch &amp; Networking", title:"Lunch &amp; Networking: A Bridge to the Future", note:"Sponsored by IBM · Harmonizing mobility, infrastructure and economic development"},
+    {time:"1:15 PM", type:"technical", label:"Technical Session 5", title:"From Data to Digital Twins: The Future of Asset Management", topic:true,
+      moderator:"Robert Sheehan, FHWA", speakers:["Charles Major, MassDOT", "Giri Venkiteela, NJ DOT", "Grace Sammartino, ESRI"],
+      desc:["This session will explore the transformative power of AI in creating digital twins, 3-D models of physical infrastructure assets that are continuously updated through embedded sensors.",
+            "Speakers will discuss how combining sensor data, inspection records, and predictive analytics enables agencies to simulate asset performance, forecast deterioration, test maintenance and investment scenarios virtually, and make more informed, data-driven asset management decisions across the network."]},
+    {time:"2:15 PM", type:"technical", label:"Technical Session 6", title:"Data Analytics and Fusion: Unlocking Mobility Insights",
+      topic:"Data Analytics &amp; Fusion: Unlocking Mobility Insights",
+      moderator:"Timothy Henry, Rhode Island College", speakers:["Jennifer Volkening, Utah DOT", "Justin O'Daniel, Databricks", "Justin Bruner, PennDOT"],
+      desc:["This technical session will explore data fusion techniques for merging disparate and often siloed data sources, including vehicle telematics, roadside sensors, social media signals, and weather data, into unified analytics platforms.",
+            "Presenters will discuss methods for cleaning, aligning, and integrating these datasets, and demonstrate how fused data can generate comprehensive insights into network performance, travel patterns, and user behavior that no single data source could reveal on its own."]},
+    {time:"3:15 PM", type:"break", label:"Break", title:"Coffee Break", note:"Sponsored by IBM"},
+    {time:"3:30 PM", type:"roundtable", label:"Peer Roundtable 2", title:"Key Takeaways",
+      topic:"AV &amp; AI Integration: Impacts to Existing Infrastructure",
+      moderator:"Hyun-A Park, Spy Pond Partners, LLC", speakers:["Matt Cuddy, VOLPE", "Lawrence Dwyer, AASHTO", "Katherine Kortum, TRB", "Jocelyn Stein, MnDOT", "Gregory Ciparelli, CT DOT"],
+      desc:["A practical session on AV and AI integration, exploring the infrastructure implications of autonomous vehicle and AI integration — data-sharing standards, V2X communications, cloud-edge processing, smart pavement markings, and real-time HD mapping."]},
+    {time:"4:30 PM", type:"general", label:"Closing", title:"Conference Wrap-Up &amp; Closing Note",
+      speakers:["Pam Cotter, RIDOT"], desc:["Next steps, and closing remarks."]}
+  ]
+};
+
+/* ===== Rendering ===== */
 const SPEAKER_COLORS = ["#0a2c4d","#0f4c86","#2f7cc4","#1f6f78","#4a5b78","#5b98d1"];
 function initials(name){
   const clean = name.replace(/^Prof\.\s*/,"");
@@ -522,7 +650,7 @@ function initials(name){
   return ((parts[0]||"")[0] + (parts[parts.length-1]||"")[0]).toUpperCase();
 }
 function speakerPhoto(s, idx){
-  if(s.photo){ return `<img src="${s.photo}" alt="${s.name}" loading="lazy">`; }
+  if(s.photo){ return `<img src="${s.photo}" alt="" width="256" height="256" loading="lazy" decoding="async">`; }
   const color = SPEAKER_COLORS[idx % SPEAKER_COLORS.length];
   return `<div class="speaker-initials" style="background:${color}">${initials(s.name)}</div>`;
 }
@@ -536,202 +664,109 @@ function speakerCard(s, idx, lead){
       <div class="speaker-role">${s.role ? s.role + ' · ' : ''}<span class="speaker-org">${s.org}</span></div>
       <div class="speaker-links">
         ${s.link ? `<a class="speaker-link" href="${s.link}" target="_blank" rel="noopener">${s.linkLabel || 'LinkedIn'} →</a>` : ''}
-        ${s.bio ? `<a class="speaker-link bio-toggle" onclick="toggleBio(event, '${bioId}', '${s.bio}')">Bio ↓</a>` : ''}
+        ${s.bio ? `<button type="button" class="speaker-link bio-toggle" aria-expanded="false" aria-controls="${bioId}" data-bio="${s.bio}">Bio ↓</button>` : ''}
       </div>
-      ${s.bio ? `<div class="speaker-bio" id="${bioId}"></div>` : ''}
+      ${s.bio ? `<div class="speaker-bio" id="${bioId}"><div></div></div>` : ''}
     </div>
   </div>`;
 }
 
-async function toggleBio(e, id, path){
-  e.preventDefault();
-  const el = document.getElementById(id);
-  const link = e.target;
-  const isOpen = el.classList.contains('open');
-
-  if(isOpen){
-    el.classList.remove('open');
-    link.textContent = 'Bio ↓';
-    return;
-  }
-
-  if(!el.dataset.loaded){
+async function toggleBio(btn){
+  const el = document.getElementById(btn.getAttribute('aria-controls'));
+  const open = btn.getAttribute('aria-expanded') !== 'true';
+  if(open && !el.dataset.loaded){
     try{
-      const res = await fetch(path);
-      el.textContent = await res.text();
+      const res = await fetch(btn.dataset.bio);
+      if(!res.ok) throw new Error(res.status);
+      el.firstElementChild.textContent = (await res.text()).trim();
       el.dataset.loaded = "true";
     }catch(err){
-      el.textContent = "Bio unavailable.";
+      el.firstElementChild.textContent = "Bio unavailable.";
     }
   }
-  el.classList.add('open');
-  link.textContent = 'Bio ↑';
+  el.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+  btn.textContent = open ? 'Bio ↑' : 'Bio ↓';
 }
 
-const LEAD_SPEAKERS = [
-  {name:"Sean McMaster", role:"Administrator", org:"FHWA", eyebrow:"Opening Keynote — Day 1",
-   photo:"https://highways.fhwa.dot.gov/sites/fhwa.dot.gov/files/inline-images/McMaster-Sean-Official-Photo-2025.jpg",
-   link:"https://highways.dot.gov/about/administrator", linkLabel:"FHWA Biography"},
-  {name:"Seval Oz", role:"Assistant Secretary for Research & Technology", org:"USDOT", eyebrow:"Opening Keynote — Day 2",
-   photo:"https://www.transportation.gov/sites/dot.gov/files/styles/cke_media_resize_small/public/2026-05/Seval%20Oz%20Official%20Portrait%20Hi%20Res.jpg?itok=Z-vep6Ro",
-   link:"https://www.linkedin.com/in/sevaloz/"}
-];
+function sessionHtml(s){
+  const badge = `<div class="stop-badge">${s.time.replace(' ','<br>')}</div>`;
+  if(s.type === 'break'){
+    return `<div class="stop type-break">${badge}
+      <div class="stop-card">
+        <h4>${s.title}${s.note ? ` — <span class="stop-break-note">${s.note}</span>` : ''}</h4>
+      </div>
+    </div>`;
+  }
+  const speakersHtml = (s.speakers||[]).map(sp=>`<span class="speaker-chip">${sp}</span>`).join('');
+  const descHtml = (s.desc||[]).map(p=>`<p>${p}</p>`).join('');
+  return `<div class="stop"${s.id ? ` id="${s.id}"` : ''}>${badge}
+    <div class="stop-card">
+      <div class="stop-top">
+        <span class="pill pill-${s.type}">${s.label}</span>
+        <h3>${s.pres ? `<a class="stop-title-link" href="${s.pres}" target="_blank" rel="noopener">${s.title}</a>` : s.title}</h3>
+      </div>
+      ${s.moderator ? `<div class="stop-mod"><b>Moderator:</b> ${s.moderator}</div>` : ''}
+      ${speakersHtml ? `<div class="stop-speakers">${speakersHtml}</div>` : ''}
+      ${descHtml ? `<div class="stop-desc">${descHtml}</div>` : ''}
+      ${s.format ? `<div class="stop-format">${s.format}</div>` : ''}
+      ${s.note ? `<div class="stop-note">${s.note}</div>` : ''}
+    </div>
+  </div>`;
+}
 
-const OTHER_SPEAKERS = [
-  {name:"Sophie Abo", org:"VOLPE", bio: "bios/Sophie-Abo.txt",link:"https://www.linkedin.com/in/sophieabo/", photo:"pics/Sophie-Abo.jpg"},
-  {name:"Mehrshad Amini", org:"URI", bio:"bios/Mehrshad-Amini.txt",link:"https://www.linkedin.com/in/mehrshad-amini-56ba7389/", photo: "pics/Mehrshad-Amini.jpg"},
-  {name:"Justin Bruner", org:"PennDOT", link:"https://www.linkedin.com/in/justin-bruner-33b81594/", photo: "pics/Justin-Bruner.jpg"},
-  {name:"Laura Chace", org:"ITS America", bio:"bios/Laura-Chace.txt",link:"https://www.linkedin.com/in/laurademeochace/", photo: "pics/Laura-Chase.png"},
-  {name:"Gregory Ciparelli", org:"CT DOT",link:"https://www.linkedin.com/in/gregory-ciparelli-0322b319a/", photo: "pics/Gregory-Ciparelli.jpg"},
-  {name:"Pam Cotter", org:"RIDOT",link:"https://www.linkedin.com/in/prcotter/", photo: "pics/Pam-Cotter.jpg"},
-  {name:"Matt Cuddy", org:"VOLPE", bio:"bios/Matt-Cuddy.txt" ,link:"https://www.linkedin.com/in/mattcuddy/", photo: "pics/Matt-Cuddy.jpg"},
-  {name:"Matthew Deal", org:"ESRI", link:"https://www.linkedin.com/in/msdeal/", photo: "pics/Matthew-Deal.jpg"},
-  <!-- {name:"Dan DiBiasio", org:"RIDOT",link:"https://www.linkedin.com/in/daniel-dibiasio-62b189105/"}, -->
-  {name:"Lawrence Dwyer", org:"AASHTO", link:"https://www.linkedin.com/in/lawrence-dwyer-b56902288/", photo: "pics/Lawrence-Dwyer.jpg"},
-  {name:"Scott Gausland", org:"RIDOT", bio:"bios/Scott-Gausland.txt", link:"https://www.linkedin.com/in/scott-gausland-74143785/", photo: "pics/Scott-Gausland.jpg"},
-  {name:"Donovan Guin", org:"IBM", bio:"bios/Donovan-Guin.txt",link:"https://www.linkedin.com/in/dguin/", photo: "pics/Donovan-Guin.jpg"},
-  {name:"Thomas Gruenstaeudl", bio:"bios/Thomas-Gru.txt",org:"ASFINAG", link:"", photo: "pics/Thomas-Grun.png"},
-  {name:"Arnulf Hagen", org:"AIDALOS", bio:"bios/Arnulf-Hagen.txt", link:"https://www.linkedin.com/in/arnulfhagen/", photo: "pics/Arnulf-Hagen.jpg"},
-  {name:"Patricia Hendren", org:"TETC", link:"https://www.linkedin.com/in/trish-hendren-transportation/", photo: "pics/Patricia-Hendren.jpg"},
-  {name:"Scott Hensley", org:"IBM", bio:"bios/Scott-Hensley.txt",link:"https://www.linkedin.com/in/scottphensley/", photo: "pics/Scott-Hensley.jpg"},
-  {name:"Tim Henry", org:"RIC", bio:"bios/Timothy-Henry.txt", link:"https://www.linkedin.com/in/timothy-henry311/", photo: "pics/Tim-Henry.png"},
-  {name:"Katherine Kortum", org:"TRB", link:"https://www.linkedin.com/in/katherine-kortum-phd-pe-94530410/", photo:"pics/Katherine-Kortum.png"},
-  {name:"Mac Lang", org:"VOLPE", bio:"bios/Mac-Lang.txt",link:"https://www.linkedin.com/in/mac-lang/", photo: "pics/Matt-Lang.png"},
-  {name:"Charles Major", org:"Mass DOT", link:"https://www.linkedin.com/in/charles-major-17409998/", photo: "pics/Charles-Major.jpg"},
-  {name:"Justin O'Daniel", org:"Databricks", bio:"bios/Justin-ODaniel.txt", link:"https://www.linkedin.com/in/justin-o-daniel-755048156/", photo: "pics/Justin-Daniel.png"},
-  {name:"Hyun-A Park", org:"Spy Pond Partners, LLC", link:"https://www.linkedin.com/in/hyun-a-park-9106551/", photo: "pics/Hyun-A-Park.jpg"},
-  {name:"Lisa Randall", org:"USDOT", bio:"bios/Lisa-Randall.txt", link:"https://www.linkedin.com/in/lisa-randall-097b6162/", photo: "pics/Lisa-Randall.png"},
-  {name:"Robert Rocchio", org:"RIDOT", link:"https://www.linkedin.com/in/robert-rocchio-b8889425/", photo: "pics/Robert-Rocchio.png"},
-  {name:"Jocelyn Stein", org:"MnDOT", bio:"bios/Jocelyn-Stein.txt", link:" https://www.linkedin.com/in/jocelyn-stein-pmp-4080755/", photo: "Jocelyn-Stein-MnDOT.jpg"},
-  {name:"Grace Sammartino", org:"ESRI", link:"https://www.linkedin.com/in/grsamm/", photo: "pics/Grace-Sammartino.jpg"},
-  {name:"Robert Sheehan", org:"FHWA", link:"https://www.linkedin.com/in/robert-sheehan-4343523/", photo: "pics/Robert-Sheehan.png"},
-  {name:"Mike Snodgrass", org:"Google", bio:"bios/Mike-Snodgrass.txt", link:"https://www.linkedin.com/in/misnodgrass/", photo: "pics/Mike-Snodgrass.jpg"},
-  {name:"Craig Thor", org:"FHWA", link:"https://www.linkedin.com/in/craig-thor-46a838120/", photo: "pics/Craig-Thor.png"},
-  {name:"Derek Torrey", org:"FHWA", bio:"bios/Derek-Torrey.txt",link:"https://www.linkedin.com/in/derektorrey/", photo: "pics/Derek-Torrey-2.png"},
-  {name:"Giri Venkiteela", org:"NJ DOT", bio:"bios/Giri-Venkiteela.txt", link:"https://www.linkedin.com/in/giri-venkiteela-a375261b/", photo: "pics/Gri-Venkiteela.jpg"},
-  {name:"Jennifer Volkening", org:"Utah DOT", bio:"bios/Jennifer-Volkening.txt", link:"https://www.linkedin.com/in/jennifer-volkening-4ba8751/", photo: "pics/Jennifer-Volkening-2.jpg"},
-  {name:"Alexander Walcher", org:"ASFINAG", link:"https://www.linkedin.com/in/alexander-walcher-978051153/", photo: "pics/Alexander-Walcher.jpg"},
-  {name:"Christos Xenophontos", org:"RIDOT", bio:"bios/Christos-Xenophontos.txt", link:"https://www.linkedin.com/in/christos-xenophontos-29b21914/", photo: "pics/Christos-Xeno.jpg"},
-  {name:"Henry Young", org:"NEIT", bio:"bios/Henry-Young.txt", link:"", photo: "pics/Henry-Young.png"},
-  {name:"Prof. Jinhua Zhao", org:"MIT", bios:"bios/Jinhua-Zhao.txt", link:"https://www.linkedin.com/in/jinhuazhao", photo:"https://static.wixstatic.com/media/29d096_086ca369ed434b47a3372465d7c4a50b~mv2.jpg/v1/fill/w_185,h_198,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/29d096_086ca369ed434b47a3372465d7c4a50b~mv2.jpg"}
-];
+// Number the topic sessions across both days and give each an anchor (#topic-01 … #topic-12).
+const TOPICS = [];
+for(const day of [1, 2]){
+  for(const s of DATA[day]){
+    if(!s.topic) continue;
+    s.day = day;
+    s.num = String(TOPICS.length + 1).padStart(2, '0');
+    s.id = `topic-${s.num}`;
+    TOPICS.push(s);
+  }
+}
+
+function showDay(n){
+  document.querySelectorAll('.day-tab').forEach(t => t.setAttribute('aria-selected', t.dataset.day == n));
+  document.querySelectorAll('.day-panel').forEach(p => { p.hidden = p.dataset.day != n; });
+}
+
+// If the URL points at a session in the hidden day (e.g. /#topic-09), switch to that day first.
+function revealHash(){
+  const el = location.hash && document.getElementById(location.hash.slice(1));
+  const panel = el && el.closest('.day-panel');
+  if(panel && panel.hidden){
+    showDay(+panel.dataset.day);
+    el.scrollIntoView();
+  }
+}
 
 document.getElementById('speakers-lead').innerHTML = LEAD_SPEAKERS.map((s,i)=>speakerCard(s,i,true)).join('');
 document.getElementById('speakers-grid').innerHTML = OTHER_SPEAKERS.map((s,i)=>speakerCard(s,i,false)).join('');
+document.getElementById('topics-grid').innerHTML = TOPICS.map(s =>
+  `<a class="topic-card" href="#${s.id}" data-day="${s.day}">
+    <span class="num">${s.num}<span class="topic-when">Day ${s.day} · ${s.time}</span></span>
+    <h4>${s.topic === true ? s.title : s.topic}</h4>
+  </a>`).join('');
+document.getElementById('day1').innerHTML = DATA[1].map(sessionHtml).join('');
+document.getElementById('day2').innerHTML = DATA[2].map(sessionHtml).join('');
 
-const DATA = {
-  1: [
-    {time:"8:00 AM", type:"general", label:"Registration", title:"Welcome Coffee &amp; Check-in", desc:["Sponsored by NEIT"]},
-    {time:"8:45 AM", type:"general", label:"Welcome", title:"Greetings &amp; Welcoming Remarks", speakers: [ "Derek Torrey, FHWA", "Henry Young, NEIT", "Robert Rocchio, RIDOT"],desc:[]},
-    {time:"9:00 AM", type:"keynote", label:"Keynote &amp; Fireside Chat", title:"The Road Ahead: AI as the New Infrastructure",
-      moderator:"Pam Cotter, RIDOT", speakers:["Sean McMaster, Administrator (FHWA)"],
-      desc:["Setting the stage for the symposium, this opening keynote and fireside conversation will discuss the paradigm shift that AI brings to the transportation sector, from Vision Zero to seamless mobility.",
-            "It will further explore how artificial intelligence and digital infrastructure are reshaping the core mission of transportation agencies, from advancing Vision Zero safety goals to enabling seamless, multimodal mobility, and how public agencies must transition from reactive management to proactive, data-driven stewardship."],
-      format:"5' Introduction · 10–15' Keynote · 25–30' Fireside chat"},
-    {time:"9:45 AM", type:"panel", label:"Panel Discussion 1", title:"Governance Frameworks for Successful AI Development and Deployment in Transportation",
-      moderator:"Lawrence Dwyer, AASHTO", speakers:["Scott Gausland, State of Rhode Island ETSS", "Jocelyn Stein, MnDOT", "Lisa Randall, USDOT ITS JPO","Matt Cuddy, VOLPE","Laura Chace, ITS America"],
-      desc:["This multi-stakeholder panel will discuss the emerging need for industry-wide standards, procurement guidance, and regulatory frameworks and draw on lessons learned from early adopters and discuss how state DOTs can build internal governance structures to manage AI risk.",
-            "It will further examine the policy, legal, and ethical guardrails needed to deploy AI responsibly in public infrastructure and will look to address data privacy and ownership, algorithmic bias and fairness in automated decision-making, and liability and accountability when AI-informed decisions affect public safety."]},
-    {time:"10:45 AM", type:"break", label:"Break", title:"Coffee Break", desc:[]},
-    {time:"11:00 AM", type:"technical", label:"Technical Session 1", title:"AI for Proactive Road Safety",
-      moderator:"Lawrence Dwyer, AASHTO", speakers:["Gregory Ciparelli, CT DOT","Mac Lang, VOLPE","Katherine Kortum, TRB"],
-      desc:["Technical Session 1 will explore how deep learning and computer vision are shifting road safety from reactive to proactive. Topics will include real-time crash prediction models that flag high-risk conditions before incidents occur, behavioral analysis of drivers, cyclists, and pedestrians to identify near-miss patterns, and AI-driven adaptive traffic control that adjusts signal timing and warnings based on live safety risk.",
-            "Presenters will share case examples of how these tools are being piloted to reduce fatalities and serious injuries on state and local roadway networks."]},
-    {time:"12:00 PM", type:"break", label:"Lunch & Networking", title:"Lunch on your own", desc:[]},
-    {time:"1:15 PM", type:"technical", label:"Technical Session 2", title:"Optimizing ITS and Mobility Systems with AI",
-      moderator:"Laura Chace, ITS America", speakers:["Lawrence Dwyer, AASHTO","Jinhua Zhao, MIT", "Donovan Guin, IBM"],
-      desc:["Technical Session 2 will deep dive into how AI is optimizing Intelligent Transportation Systems (ITS) and mobility networks. Speakers will cover adaptive traffic signal control that responds to real-time conditions, predictive congestion management that anticipates bottlenecks before they form, and machine learning applications that improve the efficiency, reliability, and rider experience of shared and autonomous mobility services.",
-            "The session will highlight how these tools can be integrated into existing ITS infrastructure with measurable performance gains."]},
-    {time:"2:15 PM", type:"case", label:"Case Study Showcase 1", title:"Real-World AI Deployment: Lessons Learned from US and International AI Deployments",
-      moderator:"Patricia Hendren, TETC", pres:"pres/Thomas-Gru.pdf", speakers:["Thomas Gruenstaeudl, ASFINAG (Austria)","Jennifer Volkening, Utah DOT","Jinhua Zhao, MIT"],
-      desc:["A showcase of real-world lessons from transportation agencies that have moved AI projects from pilot to implementation. Presenters will share case studies that cover project scope, implementation challenges, procurement and vendor management, measured outcomes, and lessons learned and will share their view on what successful AI deployment looks like and what pitfalls to avoid."]},
-    {time:"3:15 PM", type:"break", label:"Break", title:"Coffee Break", desc:[]},
-    {time:"3:30 PM", type:"roundtable", label:"Peer Roundtable 1", title:"Getting Started: Building an AI Strategy",
-      moderator:["Craig Thor, FHWA", "Turner Fairbank"], speakers:["Alexander Walcher, ASFINAG (Austria)", "Giri Venkiteela, NJ DOT","Robert Sheehan, FHWA", "Mike Snodgrass, Google"],
-      desc:["An interactive, discussion-based roundtable for agencies at the early stages of AI adoption, focused on the foundational steps required to launch an agency-wide AI strategy.",
-            "Peers will discuss practical first steps: identifying high-value use cases, auditing and collecting the data needed to support AI models, addressing data quality and interoperability gaps, and securing organizational buy-in and funding."]},
-    {time:"4:30 PM", type:"general", label:"Wrap-Up", title:"Key Takeaways from Day 1 and Day 2 Look Ahead",
-      speakers:["Hyun-A Park","Pam Cotter (Day 2 Look Ahead and Exhibition)"], desc:[]},
-    {time:"5:00 PM", type:"break", label:"Reception", title:"Exhibition and Networking Reception", note:"Sponsored by ESRI", desc:["Sponsored by ERSI"]}
-  ],
-  2: [
-    {time:"8:00 AM", type:"general", label:"Registration", title:"Welcome Coffee &amp; Check-in", desc:["Sponsored by NEIT"]},
-    {time:"8:45 AM", type:"general", label:"Greetings &amp Welcoming Remarks", title:"", speakers: ["Henry Young, NEIT", "Christos Xenophontos, RIDOT"], desc: []},
-    {time:"9:00 AM", type:"keynote", label:"Keynote &amp; Fireside Chat — Future Vision", title:"Mobility 2040: AI's Role in Next-Gen Transport",
-      moderator:"Christos Xenophontos, RIDOT", speakers:["Seval Oz, Assistant Secretary for Research &amp; Technology (USDOT)"],
-      desc:["This future-focused keynote and fireside chat will look ahead to Mobility 2040 and the disruptive technologies, from connected and autonomous vehicles to AI-orchestrated multimodal networks, that will define the next generation of transportation.",
-            "The fireside chat will further explore AI&#39;s foundational role in managing increasingly complex mobility ecosystems and will challenge attendees to think beyond incremental improvements toward a long-term vision for how AI can reshape statewide transportation planning and operations over the next two decades."],
-      format:"5' Introduction · 10–15' Keynote · 25–30' Fireside chat"},
-    {time:"9:45 AM", type:"technical", label:"Technical Session 3", title:"AI in Planning and Project Development",
-      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:["Gregory Ciparelli, CT DOT","Sophie Abo, VOLPE","Grace Sammartino, ESRI"],
-      desc:["This session will examine how generative AI and optimization models are transforming transportation planning and project delivery. Presenters will showcase how AI enhances digital project delivery, BIM-to-field execution, and schedule/cost risk forecasting during construction and will demonstrate how these tools can compress planning timelines while improving the quality of decision-making."],
-      note:"Planning notes (tentative): Federal — USDOT AI Planning and Design (AI TPD) Initiative, speakers likely from the US Volpe Center. State — Giri Venkiteela, NJDOT, on AI scenario modeling for systems planning. Private — ESRI. National — possibly Lawrence Dwyer, AASHTO."},
-    {time:"10:45 AM", type:"break", label:"Break", title:"Coffee Break", desc:[]},
-    {time:"11:00 AM", type:"technical", label:"Technical Session 4", title:"AI in Asset Management: Predictive Maintenance and Inspection",
-      moderator:"Christopher Baxter, URI", speakers:["Donovan Guin &amp; Scott Hensley, IBM","Arnulf Hagen, AIDALOS","Mehrshad Amini, URI"],
-      desc:["Presenters in this session will cover how AI is facilitating the shifting from reactive repairs to predictive maintenance and how computer vision and machine learning are automating infrastructure inspection and maintenance planning.",
-            "The session will cover AI-enabled automated condition assessments, coupled with machine learning models that prioritize and optimize maintenance schedules based on condition and risk—extending asset life while reducing inspection costs and field labor demands."]},
-    {time:"12:00 PM", type:"break", label:"Lunch & Networking", title:"Lunch & Networking: A Bridge to the Future", note:"Sponsored by IBM", desc:["Sponsored by IBM - Harmonizing mobility, infrastructure and economic development"]},
-    {time:"1:15 PM", type:"technical", label:"Technical Session 5", title:"From Data to Digital Twins: The Future of Asset Management",
-      moderator:"Robert Sheehan, FHWA", speakers:["Charles Major, MassDOT","Giri Venkiteela, NJ DOT","Grace Sammartino, ESRI"],
-      desc:["This session will explore the transformative power of AI in creating digital twins, 3-D models of physical infrastructure assets that are continuously updated through embedded sensors.",
-            "Speakers will discuss how combining sensor data, inspection records, and predictive analytics enables agencies to simulate asset performance, forecast deterioration, test maintenance and investment scenarios virtually, and make more informed, data-driven asset management decisions across the network."]},
-    {time:"2:15 PM", type:"technical", label:"Technical Session 6", title:"Data Analytics and Fusion: Unlocking Mobility Insights",
-      moderator:"Timothy Henry, Rhode Island College", speakers:["Jennifer Volkening, Utah DOT", "Justin O'Daniel, Databricks", "Justin Burner, PennDOT"],
-      desc:["This technical session will explore data fusion techniques for merging disparate and often siloed data sources, including vehicle telematics, roadside sensors, social media signals, and weather data, into unified analytics platforms.",
-            "Presenters will discuss methods for cleaning, aligning, and integrating these datasets, and demonstrate how fused data can generate comprehensive insights into network performance, travel patterns, and user behavior that no single data source could reveal on its own."]},
-    {time:"3:15 PM", type:"break", label:"Break", title:"Coffee Break - Sponsored by IBM", desc:[]},
-    {time:"3:30 PM", type:"roundtable", label:"Peer Roundtable 2", title:"Key Takeaways",
-      moderator:"Hyun-A Park, Spy Pond Partners, LLC", speakers:["Matt Cuddy, VOLPE","Lawrence Dwyer, AASHTO","Katherine Kortum, TRB", "Jocelyn Stein, MnDOT", "Gregory Ciparelli, CT DOT"],
-      desc:["A practical session on AV and AI integration, exploring the infrastructure implications of autonomous vehicle and AI integration — data-sharing standards, V2X communications, cloud-edge processing, smart pavement markings, and real-time HD mapping."]},
-    {time:"4:30 PM", type:"general", label:"Closing", title:"Conference Wrap-Up &amp; Closing Note",
-      speakers:["Pam Cotter, RIDOT"], desc:["Next steps, and closing remarks."]}
-  ]
-};
-
-const PILL_CLASS = {keynote:"pill-keynote",panel:"pill-panel",technical:"pill-technical",case:"pill-case",roundtable:"pill-roundtable",general:"pill-general",break:"pill-general"};
-
-function render(dayNum){
-  const container = document.getElementById('day'+dayNum);
-  container.innerHTML = DATA[dayNum].map(s => {
-    if(s.type === 'break'){
-      return `<div class="stop type-break">
-        <div class="stop-badge">${s.time.replace(' ','<br>')}</div>
-        <div class="stop-card">
-          <h4>${s.title}${s.note ? ' — <span style="font-weight:400;color:var(--ink-soft)">'+s.note+'</span>' : ''}</h4>
-        </div>
-      </div>`;
-    }
-    const speakersHtml = (s.speakers||[]).map(sp=>`<span class="speaker-chip">${sp}</span>`).join('');
-    const descHtml = (s.desc||[]).map(p=>`<p>${p}</p>`).join('');
-    return `<div class="stop">
-      <div class="stop-badge">${s.time.replace(' ','<br>')}</div>
-      <div class="stop-card">
-        <div class="stop-top">
-          <div>
-            <span class="pill ${PILL_CLASS[s.type]}">${s.label}</span>
-            <h3 style="margin-top:10px;">${s.pres ? `<a class="stop-title-link" href="${s.pres}" target="_blank" rel="noopener">${s.title}</a>` : s.title}</h3>
-          </div>
-        </div>
-        ${s.moderator ? `<div class="stop-mod"><b>Moderator:</b> ${s.moderator}</div>` : ''}
-        ${speakersHtml ? `<div class="stop-speakers">${speakersHtml}</div>` : ''}
-        ${descHtml ? `<div class="stop-desc">${descHtml}</div>` : ''}
-        ${s.format ? `<div class="stop-format">${s.format}</div>` : ''}
-        ${s.note ? `<div class="stop-note">${s.note}</div>` : ''}
-      </div>
-    </div>`;
-  }).join('');
-}
-render(1); render(2);
-
-function showDay(n){
-  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelector(`.day-tab[data-day="${n}"]`).classList.add('active');
-  document.getElementById('day1').style.display = n===1 ? 'block':'none';
-  document.getElementById('day2').style.display = n===2 ? 'block':'none';
-  document.getElementById('day1-intro').style.display = n===1 ? 'block':'none';
-  document.getElementById('day2-intro').style.display = n===2 ? 'block':'none';
-}
+document.getElementById('speakers').addEventListener('click', e => {
+  const btn = e.target.closest('.bio-toggle');
+  if(btn) toggleBio(btn);
+});
+document.querySelector('.day-tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.day-tab');
+  if(tab) showDay(+tab.dataset.day);
+});
+// Runs before the browser follows the link, so the target session is visible when it scrolls.
+document.getElementById('topics-grid').addEventListener('click', e => {
+  const card = e.target.closest('.topic-card');
+  if(card) showDay(+card.dataset.day);
+});
+window.addEventListener('hashchange', revealHash);
+revealHash();
 </script>
 </body>
 </html>
