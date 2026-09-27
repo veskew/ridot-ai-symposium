@@ -224,7 +224,6 @@
   .speaker-eyebrow{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--route);font-weight:600;margin-bottom:4px;display:block;}
   .speaker-name{font-family:var(--font-display);font-weight:700;line-height:1.1;color:var(--navy);}
   .speaker-card.lead .speaker-name{font-size:1.7rem;}
-  .speaker-name-link{color:inherit;text-decoration:none;border-bottom:1.5px dashed var(--route);}
   .speaker-role{color:var(--ink-soft);font-size:0.88rem;margin-top:4px;line-height:1.4;}
   .speaker-org{color:var(--ink);font-weight:600;font-size:0.88rem;}
   .speaker-links{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
@@ -315,7 +314,6 @@
   .pill-roundtable{background:var(--slate);}
   .pill-general{background:var(--ink-soft);}
   .stop-card h3{font-size:1.5rem;color:var(--navy);line-height:1.15;font-weight:700;margin-top:10px;}
-  .stop-title-link{color:inherit;text-decoration:none;border-bottom:1.5px dashed var(--highway);}
   .stop-mod{font-size:0.86rem;color:var(--ink-soft);margin-top:6px;}
   .stop-mod b{color:var(--ink);font-weight:600;}
   .stop-speakers{
@@ -325,6 +323,18 @@
     font-size:0.82rem;background:var(--sky);color:var(--navy);border:1px solid var(--sky-deep);
     padding:5px 12px;border-radius:8px;
   }
+  /* Speaker who shared slides: the chip links to their PDF */
+  a.speaker-chip{text-decoration:none;border-color:var(--route-soft);transition:background .15s, border-color .15s;}
+  a.speaker-chip:hover{background:var(--sky-deep);border-color:var(--route);}
+  .chip-slides{
+    margin-left:6px;padding-left:7px;border-left:1px solid var(--route-soft);white-space:nowrap;
+    font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.04em;font-weight:600;color:var(--route);
+  }
+  .stop-slides{
+    display:inline-block;margin-top:12px;font-family:var(--font-mono);font-size:0.76rem;font-weight:600;
+    color:var(--route);text-decoration:none;border-bottom:1px solid transparent;
+  }
+  .stop-slides:hover{border-bottom-color:var(--route);}
   .stop-desc{color:var(--ink-soft);font-size:0.94rem;line-height:1.62;}
   .stop-desc p{margin:0 0 10px;}
   .stop-desc p:last-child{margin-bottom:0;}
@@ -568,11 +578,14 @@ const OTHER_SPEAKERS = [
 /* ===== Program =====
    type:  keynote | panel | technical | case | roundtable | general | break
    topic: true → listed under "Key topics" using the session title; a string → listed with that shorter title
-   note:  shown after the title on breaks, or as a callout on sessions */
+   note:  shown after the title on breaks, or as a callout on sessions
+   speakers: a string, or {name, pres} to link that speaker's own slides (PDF in pres/)
+   pres:  slides that belong to the whole session rather than one speaker (presLabel names the link) */
 const DATA = {
   1: [
     {time:"8:00 AM", type:"general", label:"Registration", title:"Welcome Coffee &amp; Check-in", desc:["Sponsored by NEIT"]},
-    {time:"8:45 AM", type:"general", label:"Welcome", title:"Greetings &amp; Welcoming Remarks", speakers:["Derek Torrey, FHWA", "Henry Young, NEIT", "Robert Rocchio, RIDOT"]},
+    {time:"8:45 AM", type:"general", label:"Welcome", title:"Greetings &amp; Welcoming Remarks", speakers:["Derek Torrey, FHWA", "Henry Young, NEIT", "Robert Rocchio, RIDOT"],
+      pres:"pres/d1-welcome-intro.pdf", presLabel:"Agenda &amp; intro slides"},
     {time:"9:00 AM", type:"keynote", label:"Keynote &amp; Fireside Chat", title:"The Road Ahead: AI as the New Infrastructure", topic:true,
       moderator:"Pam Cotter, RIDOT", speakers:["Sean McMaster, Administrator (FHWA)"],
       desc:["Setting the stage for the symposium, this opening keynote and fireside conversation will discuss the paradigm shift that AI brings to the transportation sector, from Vision Zero to seamless mobility.",
@@ -580,26 +593,43 @@ const DATA = {
       format:"5' Introduction · 10–15' Keynote · 25–30' Fireside chat"},
     {time:"9:45 AM", type:"panel", label:"Panel Discussion 1", title:"Governance Frameworks for Successful AI Development and Deployment in Transportation",
       topic:"Governance Frameworks for Successful AI Development &amp; Deployment",
-      moderator:"Lawrence Dwyer, AASHTO", speakers:["Scott Gausland, State of Rhode Island ETSS", "Jocelyn Stein, MnDOT", "Lisa Randall, USDOT ITS JPO", "Matt Cuddy, VOLPE", "Laura Chace, ITS America"],
+      moderator:"Lawrence Dwyer, AASHTO", speakers:["Scott Gausland, State of Rhode Island ETSS", 
+        {name:"Jocelyn Stein, MnDOT", pres:"pres/d1-pd1-jocelyn-stein.pdf"},
+        {name:"Lisa Randall, USDOT ITS JPO", pres:"pres/d1-pd1-lisa-randall.pdf"},
+        "Matt Cuddy, VOLPE",
+        {name:"Laura Chace, ITS America", pres:"pres/d1-pd1-laura-chace.pdf"}],
       desc:["This multi-stakeholder panel will discuss the emerging need for industry-wide standards, procurement guidance, and regulatory frameworks and draw on lessons learned from early adopters and discuss how state DOTs can build internal governance structures to manage AI risk.",
             "It will further examine the policy, legal, and ethical guardrails needed to deploy AI responsibly in public infrastructure and will look to address data privacy and ownership, algorithmic bias and fairness in automated decision-making, and liability and accountability when AI-informed decisions affect public safety."]},
     {time:"10:45 AM", type:"break", label:"Break", title:"Coffee Break"},
     {time:"11:00 AM", type:"technical", label:"Technical Session 1", title:"AI for Proactive Road Safety", topic:true,
-      moderator:"Lawrence Dwyer, AASHTO", speakers:["Gregory Ciparelli, CT DOT", "Mac Lang, VOLPE", "Katherine Kortum, TRB"],
+      moderator:"Lawrence Dwyer, AASHTO", speakers:[
+        {name:"Gregory Ciparelli, CT DOT", pres:"pres/d1-ts1-gregory-ciparelli.pdf"},
+        {name:"Mac Lang, VOLPE", pres:"pres/d1-ts1-mac-lang.pdf"},
+        "Katherine Kortum, TRB"],
       desc:["Technical Session 1 will explore how deep learning and computer vision are shifting road safety from reactive to proactive. Topics will include real-time crash prediction models that flag high-risk conditions before incidents occur, behavioral analysis of drivers, cyclists, and pedestrians to identify near-miss patterns, and AI-driven adaptive traffic control that adjusts signal timing and warnings based on live safety risk.",
             "Presenters will share case examples of how these tools are being piloted to reduce fatalities and serious injuries on state and local roadway networks."]},
     {time:"12:00 PM", type:"break", label:"Lunch &amp; Networking", title:"Lunch on your own"},
     {time:"1:15 PM", type:"technical", label:"Technical Session 2", title:"Optimizing ITS and Mobility Systems with AI",
       topic:"Optimizing ITS &amp; Mobility Systems with AI",
-      moderator:"Laura Chace, ITS America", speakers:["Lawrence Dwyer, AASHTO", "Jinhua Zhao, MIT", "Donovan Guin, IBM"],
+      moderator:"Laura Chace, ITS America", speakers:[
+        "Lawrence Dwyer, AASHTO",
+        {name:"Jinhua Zhao, MIT", pres:"pres/d1-ts2-jinhua-zhao.pdf"},
+        {name:"Donovan Guin, IBM", pres:"pres/d1-ts2-donovan-guin.pdf"}],
       desc:["Technical Session 2 will deep dive into how AI is optimizing Intelligent Transportation Systems (ITS) and mobility networks. Speakers will cover adaptive traffic signal control that responds to real-time conditions, predictive congestion management that anticipates bottlenecks before they form, and machine learning applications that improve the efficiency, reliability, and rider experience of shared and autonomous mobility services.",
             "The session will highlight how these tools can be integrated into existing ITS infrastructure with measurable performance gains."]},
     {time:"2:15 PM", type:"case", label:"Case Study Showcase 1", title:"Real-World AI Deployment: Lessons Learned from US and International AI Deployments", topic:true,
-      moderator:"Patricia Hendren, TETC", pres:"pres/Thomas-Gru.pdf", speakers:["Thomas Gruenstaeudl, ASFINAG (Austria)", "Jennifer Volkening, Utah DOT", "Jinhua Zhao, MIT"],
+      moderator:"Patricia Hendren, TETC", speakers:[
+        {name:"Thomas Gruenstaeudl, ASFINAG (Austria)", pres:"pres/d1-cs1-thomas-gruenstaeudl.pdf"},
+        "Jennifer Volkening, Utah DOT",
+        {name:"Jinhua Zhao, MIT", pres:"pres/d1-cs1-jinhua-zhao.pdf"}],
       desc:["A showcase of real-world lessons from transportation agencies that have moved AI projects from pilot to implementation. Presenters will share case studies that cover project scope, implementation challenges, procurement and vendor management, measured outcomes, and lessons learned and will share their view on what successful AI deployment looks like and what pitfalls to avoid."]},
     {time:"3:15 PM", type:"break", label:"Break", title:"Coffee Break"},
     {time:"3:30 PM", type:"roundtable", label:"Peer Roundtable 1", title:"Getting Started: Building an AI Strategy", topic:true,
-      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:["Alexander Walcher, ASFINAG (Austria)", "Giri Venkiteela, NJ DOT", "Robert Sheehan, FHWA", "Mike Snodgrass, Google"],
+      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:[
+        "Alexander Walcher, ASFINAG (Austria)",
+        {name:"Giri Venkiteela, NJ DOT", pres:"pres/d1-pr1-giri-venkiteela.pdf"},
+        {name:"Robert Sheehan, FHWA", pres:"pres/d1-pr1-robert-sheehan.pdf"},
+        "Mike Snodgrass, Google"],
       desc:["An interactive, discussion-based roundtable for agencies at the early stages of AI adoption, focused on the foundational steps required to launch an agency-wide AI strategy.",
             "Peers will discuss practical first steps: identifying high-value use cases, auditing and collecting the data needed to support AI models, addressing data quality and interoperability gaps, and securing organizational buy-in and funding."]},
     {time:"4:30 PM", type:"general", label:"Wrap-Up", title:"Key Takeaways from Day 1 and Day 2 Look Ahead",
@@ -615,21 +645,33 @@ const DATA = {
             "The fireside chat will further explore AI&#39;s foundational role in managing increasingly complex mobility ecosystems and will challenge attendees to think beyond incremental improvements toward a long-term vision for how AI can reshape statewide transportation planning and operations over the next two decades."],
       format:"5' Introduction · 10–15' Keynote · 25–30' Fireside chat"},
     {time:"9:45 AM", type:"technical", label:"Technical Session 3", title:"AI in Planning and Project Development", topic:true,
-      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:["Gregory Ciparelli, CT DOT", "Sophie Abo, VOLPE", "Grace Sammartino, ESRI"],
+      moderator:"Craig Thor, FHWA Turner Fairbank", speakers:[
+        {name:"Gregory Ciparelli, CT DOT", pres:"pres/d2-ts3-gregory-ciparelli.pdf"},
+        {name:"Sophie Abo, VOLPE", pres:"pres/d2-ts3-sophie-abo.pdf"},
+        {name:"Grace Sammartino, ESRI", pres:"pres/d2-ts3-grace-sammartino.pdf"}],
       desc:["This session will examine how generative AI and optimization models are transforming transportation planning and project delivery. Presenters will showcase how AI enhances digital project delivery, BIM-to-field execution, and schedule/cost risk forecasting during construction and will demonstrate how these tools can compress planning timelines while improving the quality of decision-making."]},
     {time:"10:45 AM", type:"break", label:"Break", title:"Coffee Break"},
     {time:"11:00 AM", type:"technical", label:"Technical Session 4", title:"AI in Asset Management: Predictive Maintenance and Inspection", topic:true,
-      moderator:"Christopher Baxter, URI", speakers:["Donovan Guin &amp; Scott Hensley, IBM", "Arnulf Hagen, AIDALOS", "Mehrshad Amini, URI"],
+      moderator:"Christopher Baxter, URI", speakers:[
+        {name:"Donovan Guin &amp; Scott Hensley, IBM", pres:"pres/d2-ts4-donovan-guin.pdf"},
+        {name:"Arnulf Hagen, AIDALOS", pres:"pres/d2-ts4-arnulf-hagen.pdf"},
+        {name:"Mehrshad Amini, URI", pres:"pres/d2-ts4-mehrshad-amini.pdf"}],
       desc:["Presenters in this session will cover how AI is facilitating the shifting from reactive repairs to predictive maintenance and how computer vision and machine learning are automating infrastructure inspection and maintenance planning.",
             "The session will cover AI-enabled automated condition assessments, coupled with machine learning models that prioritize and optimize maintenance schedules based on condition and risk—extending asset life while reducing inspection costs and field labor demands."]},
     {time:"12:00 PM", type:"break", label:"Lunch &amp; Networking", title:"Lunch &amp; Networking: A Bridge to the Future", note:"Sponsored by IBM · Harmonizing mobility, infrastructure and economic development"},
     {time:"1:15 PM", type:"technical", label:"Technical Session 5", title:"From Data to Digital Twins: The Future of Asset Management", topic:true,
-      moderator:"Robert Sheehan, FHWA", speakers:["Charles Major, MassDOT", "Giri Venkiteela, NJ DOT", "Grace Sammartino, ESRI"],
+      moderator:"Robert Sheehan, FHWA", speakers:[
+        {name:"Charles Major, MassDOT", pres:"pres/d2-ts5-charles-major.pdf"},
+        {name:"Giri Venkiteela, NJ DOT", pres:"pres/d2-ts5-giri-venkiteela.pdf"},
+        {name:"Grace Sammartino, ESRI", pres:"pres/d2-ts5-grace-sammartino.pdf"}],
       desc:["This session will explore the transformative power of AI in creating digital twins, 3-D models of physical infrastructure assets that are continuously updated through embedded sensors.",
             "Speakers will discuss how combining sensor data, inspection records, and predictive analytics enables agencies to simulate asset performance, forecast deterioration, test maintenance and investment scenarios virtually, and make more informed, data-driven asset management decisions across the network."]},
     {time:"2:15 PM", type:"technical", label:"Technical Session 6", title:"Data Analytics and Fusion: Unlocking Mobility Insights",
       topic:"Data Analytics &amp; Fusion: Unlocking Mobility Insights",
-      moderator:"Timothy Henry, Rhode Island College", speakers:["Jennifer Volkening, Utah DOT", "Justin O'Daniel, Databricks", "Justin Bruner, PennDOT"],
+      moderator:"Timothy Henry, Rhode Island College", speakers:[
+        {name:"Jennifer Volkening, Utah DOT", pres:"pres/d2-ts6-jennifer-volkening.pdf"},
+        {name:"Justin O'Daniel, Databricks", pres:"pres/d2-ts6-justin-odaniel.pdf"},
+        {name:"Justin Bruner, PennDOT", pres:"pres/d2-ts6-justin-bruner.pdf"}],
       desc:["This technical session will explore data fusion techniques for merging disparate and often siloed data sources, including vehicle telematics, roadside sensors, social media signals, and weather data, into unified analytics platforms.",
             "Presenters will discuss methods for cleaning, aligning, and integrating these datasets, and demonstrate how fused data can generate comprehensive insights into network performance, travel patterns, and user behavior that no single data source could reveal on its own."]},
     {time:"3:15 PM", type:"break", label:"Break", title:"Coffee Break", note:"Sponsored by IBM"},
@@ -660,7 +702,7 @@ function speakerCard(s, idx, lead){
     <div class="speaker-photo">${speakerPhoto(s, idx)}</div>
     <div class="speaker-info">
       ${lead ? `<span class="speaker-eyebrow">${s.eyebrow}</span>` : ''}
-      <div class="speaker-name">${s.pres ? `<a class="speaker-name-link" href="${s.pres}" target="_blank" rel="noopener">${s.name}</a>` : s.name}</div>
+      <div class="speaker-name">${s.name}</div>
       <div class="speaker-role">${s.role ? s.role + ' · ' : ''}<span class="speaker-org">${s.org}</span></div>
       <div class="speaker-links">
         ${s.link ? `<a class="speaker-link" href="${s.link}" target="_blank" rel="noopener">${s.linkLabel || 'LinkedIn'} →</a>` : ''}
@@ -689,6 +731,12 @@ async function toggleBio(btn){
   btn.textContent = open ? 'Bio ↑' : 'Bio ↓';
 }
 
+// A speaker is a plain string, or {name, pres} when they shared slides for this talk.
+function speakerChip(sp){
+  if(typeof sp === 'string') return `<span class="speaker-chip">${sp}</span>`;
+  return `<a class="speaker-chip" href="${sp.pres}" target="_blank" rel="noopener" title="View slides (PDF)">${sp.name}<span class="chip-slides">Slides ↗</span></a>`;
+}
+
 function sessionHtml(s){
   const badge = `<div class="stop-badge">${s.time.replace(' ','<br>')}</div>`;
   if(s.type === 'break'){
@@ -698,19 +746,20 @@ function sessionHtml(s){
       </div>
     </div>`;
   }
-  const speakersHtml = (s.speakers||[]).map(sp=>`<span class="speaker-chip">${sp}</span>`).join('');
+  const speakersHtml = (s.speakers||[]).map(speakerChip).join('');
   const descHtml = (s.desc||[]).map(p=>`<p>${p}</p>`).join('');
   return `<div class="stop"${s.id ? ` id="${s.id}"` : ''}>${badge}
     <div class="stop-card">
       <div class="stop-top">
         <span class="pill pill-${s.type}">${s.label}</span>
-        <h3>${s.pres ? `<a class="stop-title-link" href="${s.pres}" target="_blank" rel="noopener">${s.title}</a>` : s.title}</h3>
+        <h3>${s.title}</h3>
       </div>
       ${s.moderator ? `<div class="stop-mod"><b>Moderator:</b> ${s.moderator}</div>` : ''}
       ${speakersHtml ? `<div class="stop-speakers">${speakersHtml}</div>` : ''}
       ${descHtml ? `<div class="stop-desc">${descHtml}</div>` : ''}
       ${s.format ? `<div class="stop-format">${s.format}</div>` : ''}
       ${s.note ? `<div class="stop-note">${s.note}</div>` : ''}
+      ${s.pres ? `<a class="stop-slides" href="${s.pres}" target="_blank" rel="noopener">${s.presLabel || 'Slides'} →</a>` : ''}
     </div>
   </div>`;
 }
