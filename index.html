@@ -141,7 +141,7 @@
   .btn-primary{background:#fff;color:var(--navy);}
   .btn-primary:hover{box-shadow:0 10px 24px -8px rgba(255,255,255,0.35);}
   .btn-yellow{background:#f9b62a;color:#000;}
-  .btn-register{margin-left:auto;}
+  .btn-proceedings{margin-left:auto;font-family:inherit;cursor:pointer;}
 
   /* mile-sign strip */
   .mile-strip{
@@ -392,7 +392,7 @@
     <p class="hero-sub">RIDOT convenes state DOT leadership, engineers, planners, and researchers for two days on the road ahead — where artificial intelligence meets the real work of building, running, and maintaining transportation systems.</p>
     <div class="hero-cta">
       <a href="#program" class="btn btn-primary">View the Program →</a>
-      <a href="https://publicinput.com/RIDOTAISymposium" class="btn btn-yellow btn-register">Registration →</a>
+      <button type="button" class="btn btn-yellow btn-proceedings" aria-live="polite" onclick="var b=this;b.textContent='Proceedings Coming Soon';clearTimeout(b._t);b._t=setTimeout(function(){b.textContent='View Proceedings →';},2500);">View Proceedings →</button>
     </div>
     <div class="mile-strip">
       <div class="mile-item"><span class="mono">Dates</span><strong>Aug 19–20, 2026</strong><small>2 full days</small></div>
