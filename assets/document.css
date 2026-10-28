@@ -1,0 +1,129 @@
+/* Shared styles for the standalone document pages (proceedings.html, executive-summary.html).
+   Tokens and type mirror index.html. */
+:root{
+  --navy-deep:#061a2e;
+  --navy:#0a2c4d;
+  --route:#2f7cc4;
+  --route-soft:#5b98d1;
+  --sky:#eef5fb;
+  --ink:#0e1f31;
+  --ink-soft:#4d6072;
+  --line:#d7e4ef;
+  --shadow: 0 12px 32px -16px rgba(10,44,77,0.35);
+  --radius: 14px;
+  --font-display:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--sky);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+h1{font-family:var(--font-display);font-weight:700;letter-spacing:0.01em;margin:0;}
+.eyebrow{
+  font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--route);font-weight:600;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+/* ===== Top bar with exit ===== */
+.nav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(6,26,46,0.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-mark{width:30px;height:30px;flex-shrink:0;}
+.nav-brand-text{color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:0.02em;line-height:1.05;}
+.nav-brand-text span{display:block;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.14em;color:var(--route-soft);font-weight:500;margin-top:2px;}
+.exit-btn{
+  display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+  padding:9px 18px;border-radius:999px;
+  background:#fff;color:var(--navy);
+  font-weight:600;font-size:0.9rem;text-decoration:none;
+  transition:transform .15s, box-shadow .15s;
+}
+.exit-btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(255,255,255,0.35);}
+.exit-btn:focus-visible{outline:3px solid #f9b62a;outline-offset:2px;}
+
+/* ===== Page ===== */
+.doc-main{padding:40px 0 64px;}
+.doc-head{max-width:720px;margin-bottom:28px;}
+.doc-head h1{font-size:clamp(2rem,3.6vw,2.9rem);color:var(--navy);margin-top:10px;}
+.doc-head p{color:var(--ink-soft);font-size:1.05rem;line-height:1.6;margin:12px 0 0;}
+@media (max-width:640px){
+  .wrap{padding:0 16px;}
+  .nav-brand-text span{display:none;}
+  .exit-btn{padding:8px 14px;font-size:0.84rem;}
+  .doc-main{padding:28px 0 40px;}
+}
+
+/* ===== Documents (proceedings / executive summary) ===== */
+.doc-viewer{
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  background:#fff;box-shadow:var(--shadow);
+}
+.doc-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:14px 18px;background:var(--navy);color:#fff;
+}
+.doc-meta{display:flex;align-items:center;gap:12px;min-width:0;}
+.doc-icon{
+  flex-shrink:0;width:36px;height:44px;border-radius:4px;background:#fff;color:var(--navy);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;
+  font-family:var(--font-mono);font-size:0.6rem;font-weight:600;letter-spacing:0.06em;
+  clip-path:polygon(0 0,72% 0,100% 22%,100% 100%,0 100%);
+}
+.doc-meta strong{display:block;font-family:var(--font-display);font-size:1.15rem;font-weight:600;letter-spacing:0.02em;line-height:1.1;}
+.doc-meta small{display:block;font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--route-soft);margin-top:3px;}
+.doc-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.doc-pager{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.08);border-radius:999px;padding:3px;}
+.doc-pos{font-family:var(--font-mono);font-size:0.76rem;color:rgba(255,255,255,0.8);padding:0 8px;min-width:68px;text-align:center;}
+.doc-pos b{color:#fff;font-weight:600;}
+.doc-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 12px;
+  border-radius:999px;border:1px solid transparent;background:none;color:rgba(255,255,255,0.85);
+  font:600 0.82rem var(--font-body);text-decoration:none;cursor:pointer;transition:background .15s,color .15s;
+}
+.doc-pager .doc-btn{padding:0;font-size:1.05rem;}
+.doc-btn:hover{background:rgba(255,255,255,0.14);color:#fff;}
+.doc-btn:disabled{opacity:0.35;cursor:default;background:none;}
+.doc-btn.ghost{border-color:rgba(255,255,255,0.25);}
+.doc-btn.download{background:#f9b62a;color:#000;}
+.doc-btn.download:hover{background:#ffc94f;}
+.doc-scroll{
+  position:relative;height:min(78vh,880px);overflow-y:auto;
+  background:linear-gradient(180deg,#e4edf5,#d5e2ee);padding:28px 24px;
+}
+.doc-page{
+  position:relative;max-width:860px;margin:0 auto 22px;background:#fff;
+  aspect-ratio:var(--page-ratio,8.5/11);border-radius:3px;
+  box-shadow:0 1px 2px rgba(10,44,77,0.12),0 14px 34px -18px rgba(10,44,77,0.45);
+}
+.doc-page:last-child{margin-bottom:0;}
+.doc-page canvas{display:block;width:100%;height:100%;border-radius:3px;}
+.doc-page:not(.rendered)::after{
+  content:"";position:absolute;inset:0;border-radius:3px;
+  background:linear-gradient(100deg,transparent 30%,rgba(223,235,246,0.7) 50%,transparent 70%) 0 0/200% 100%;
+  animation:doc-shimmer 1.4s linear infinite;
+}
+@keyframes doc-shimmer{to{background-position:-200% 0;}}
+.doc-fallback{max-width:520px;margin:12vh auto 0;text-align:center;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;}
+.doc-fallback a{color:var(--route);font-weight:600;}
+.doc-viewer:fullscreen{border-radius:0;display:flex;flex-direction:column;}
+.doc-viewer:fullscreen .doc-scroll{height:auto;flex:1;}
+@media (max-width:640px){
+  .doc-bar{padding:12px 14px;}
+  .doc-controls{width:100%;justify-content:space-between;}
+  .doc-scroll{padding:14px 10px;height:72vh;}
+  .doc-page{margin-bottom:12px;}
+  .doc-btn.fs,.doc-lbl{display:none;}
+  .doc-controls{gap:6px;}
+  .doc-controls .doc-btn.ghost{padding:0;width:32px;}
+  .doc-pos{min-width:54px;padding:0 4px;}
+}
