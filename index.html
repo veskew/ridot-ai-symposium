@@ -75,7 +75,7 @@
   .nav-mark{width:30px;height:30px;flex-shrink:0;}
   .nav-brand-text{color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:0.02em;line-height:1.05;}
   .nav-brand-text span{display:block;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.14em;color:var(--route-soft);font-weight:500;margin-top:2px;}
-  .nav-links{display:flex;gap:24px;}
+  .nav-links{display:flex;gap:28px;}
   .nav-links a{
     color:rgba(255,255,255,0.78);
     font-size:0.86rem;
@@ -85,7 +85,7 @@
     transition:color .15s;
   }
   .nav-links a:hover{color:#fff;}
-  @media (max-width:1080px){
+  @media (max-width:720px){
     :root{--nav-offset:104px;}
     .nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;row-gap:8px;}
     .nav-links{width:100%;gap:22px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;}
@@ -141,7 +141,7 @@
   .btn-primary{background:#fff;color:var(--navy);}
   .btn-primary:hover{box-shadow:0 10px 24px -8px rgba(255,255,255,0.35);}
   .btn-yellow{background:#f9b62a;color:#000;}
-  .btn-proceedings{margin-left:auto;font-family:inherit;cursor:pointer;}
+  .hero-docs{display:flex;gap:14px;flex-wrap:wrap;margin-left:auto;}
 
   /* mile-sign strip */
   .mile-strip{
@@ -352,71 +352,6 @@
     .pill{display:inline-block;white-space:normal;line-height:1.4;border-radius:12px;}
   }
 
-  /* ===== Documents (proceedings / executive summary) ===== */
-  .doc-viewer{
-    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
-    background:#fff;box-shadow:var(--shadow);
-  }
-  .doc-bar{
-    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    padding:14px 18px;background:var(--navy);color:#fff;
-  }
-  .doc-meta{display:flex;align-items:center;gap:12px;min-width:0;}
-  .doc-icon{
-    flex-shrink:0;width:36px;height:44px;border-radius:4px;background:#fff;color:var(--navy);
-    display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;
-    font-family:var(--font-mono);font-size:0.6rem;font-weight:600;letter-spacing:0.06em;
-    clip-path:polygon(0 0,72% 0,100% 22%,100% 100%,0 100%);
-  }
-  .doc-meta strong{display:block;font-family:var(--font-display);font-size:1.15rem;font-weight:600;letter-spacing:0.02em;line-height:1.1;}
-  .doc-meta small{display:block;font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--route-soft);margin-top:3px;}
-  .doc-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .doc-pager{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.08);border-radius:999px;padding:3px;}
-  .doc-pos{font-family:var(--font-mono);font-size:0.76rem;color:rgba(255,255,255,0.8);padding:0 8px;min-width:68px;text-align:center;}
-  .doc-pos b{color:#fff;font-weight:600;}
-  .doc-btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 12px;
-    border-radius:999px;border:1px solid transparent;background:none;color:rgba(255,255,255,0.85);
-    font:600 0.82rem var(--font-body);text-decoration:none;cursor:pointer;transition:background .15s,color .15s;
-  }
-  .doc-pager .doc-btn{padding:0;font-size:1.05rem;}
-  .doc-btn:hover{background:rgba(255,255,255,0.14);color:#fff;}
-  .doc-btn:disabled{opacity:0.35;cursor:default;background:none;}
-  .doc-btn.ghost{border-color:rgba(255,255,255,0.25);}
-  .doc-btn.download{background:#f9b62a;color:#000;}
-  .doc-btn.download:hover{background:#ffc94f;}
-  .doc-scroll{
-    position:relative;height:min(78vh,880px);overflow-y:auto;
-    background:linear-gradient(180deg,#e4edf5,#d5e2ee);padding:28px 24px;
-  }
-  .doc-page{
-    position:relative;max-width:860px;margin:0 auto 22px;background:#fff;
-    aspect-ratio:var(--page-ratio,8.5/11);border-radius:3px;
-    box-shadow:0 1px 2px rgba(10,44,77,0.12),0 14px 34px -18px rgba(10,44,77,0.45);
-  }
-  .doc-page:last-child{margin-bottom:0;}
-  .doc-page canvas{display:block;width:100%;height:100%;border-radius:3px;}
-  .doc-page:not(.rendered)::after{
-    content:"";position:absolute;inset:0;border-radius:3px;
-    background:linear-gradient(100deg,transparent 30%,rgba(223,235,246,0.7) 50%,transparent 70%) 0 0/200% 100%;
-    animation:doc-shimmer 1.4s linear infinite;
-  }
-  @keyframes doc-shimmer{to{background-position:-200% 0;}}
-  .doc-fallback{max-width:520px;margin:12vh auto 0;text-align:center;color:var(--ink-soft);font-size:0.95rem;line-height:1.6;}
-  .doc-fallback a{color:var(--route);font-weight:600;}
-  .doc-viewer:fullscreen{border-radius:0;display:flex;flex-direction:column;}
-  .doc-viewer:fullscreen .doc-scroll{height:auto;flex:1;}
-  @media (max-width:640px){
-    .doc-bar{padding:12px 14px;}
-    .doc-controls{width:100%;justify-content:space-between;}
-    .doc-scroll{padding:14px 10px;height:72vh;}
-    .doc-page{margin-bottom:12px;}
-    .doc-btn.fs,.doc-lbl{display:none;}
-    .doc-controls{gap:6px;}
-    .doc-controls .doc-btn.ghost{padding:0;width:32px;}
-    .doc-pos{min-width:54px;padding:0 4px;}
-  }
-
   /* ===== Organizing team ===== */
   .logi-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
   .logi-col{background:#fff;padding:32px 30px;}
@@ -454,8 +389,6 @@
       <a href="#speakers">Speakers</a>
       <a href="#topics">Key Topics</a>
       <a href="#program">Program</a>
-      <a href="#proceedings">Proceedings</a>
-      <a href="#executive-summary">Executive Summary</a>
       <a href="#logistics">Organizing Team</a>
       <a href="#venue">Venue</a>
     </div>
@@ -469,7 +402,10 @@
     <p class="hero-sub">RIDOT convenes state DOT leadership, engineers, planners, and researchers for two days on the road ahead — where artificial intelligence meets the real work of building, running, and maintaining transportation systems.</p>
     <div class="hero-cta">
       <a href="#program" class="btn btn-primary">View the Program →</a>
-      <a href="#proceedings" class="btn btn-yellow btn-proceedings">View Proceedings →</a>
+      <div class="hero-docs">
+        <a href="proceedings.html" class="btn btn-yellow">View Proceedings →</a>
+        <a href="executive-summary.html" class="btn btn-yellow">View Executive Summary →</a>
+      </div>
     </div>
     <div class="mile-strip">
       <div class="mile-item"><span class="mono">Dates</span><strong>Aug 19–20, 2026</strong><small>2 full days</small></div>
@@ -529,28 +465,6 @@
       <p class="day-intro">Day 2 shifts focus to the maintenance, longevity, and future development of road and mobility assets, and the strategic role of AI in long-term planning. MC: Pam Cotter and/or Dan DiBiasio.</p>
       <div id="day2" class="route"></div>
     </div>
-  </div>
-</section>
-
-<section id="proceedings" class="bg-sky">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Symposium Record</span>
-      <h2>Proceedings</h2>
-      <p>The full record of both days — every session's discussion, speaker insights, and the themes that emerged across the symposium and peer exchange.</p>
-    </div>
-    <div class="doc-viewer" data-src="docs/ridot-ai-symposium-2026-proceedings.pdf" data-title="Symposium Proceedings" data-size="1.7 MB"></div>
-  </div>
-</section>
-
-<section id="executive-summary">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">At a Glance</span>
-      <h2>Executive Summary</h2>
-      <p>A four-page companion to the proceedings — the consensus, the numbers, and the bottom line for transportation leaders.</p>
-    </div>
-    <div class="doc-viewer" data-src="docs/ridot-ai-symposium-2026-executive-summary.pdf" data-title="Executive Summary" data-size="3.2 MB"></div>
   </div>
 </section>
 
@@ -905,138 +819,6 @@ document.getElementById('topics-grid').addEventListener('click', e => {
 });
 window.addEventListener('hashchange', revealHash);
 revealHash();
-
-/* ===== Document viewers =====
-   Each .doc-viewer renders its PDF with PDF.js, which loads only once a viewer nears the screen.
-   Pages render lazily as they scroll into view; if PDF.js can't load, open/download links remain. */
-const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/';
-let pdfjsReady;
-function loadPdfjs(){
-  return pdfjsReady ||= import(PDFJS + 'pdf.min.mjs').then(lib => {
-    lib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.mjs';
-    return lib;
-  });
-}
-
-function setupDocViewer(el){
-  const {src, title, size} = el.dataset;
-  const file = src.split('/').pop();
-  el.innerHTML = `
-    <div class="doc-bar">
-      <div class="doc-meta"><span class="doc-icon" aria-hidden="true">PDF</span>
-        <div><strong>${title}</strong><small class="doc-info">PDF · ${size}</small></div></div>
-      <div class="doc-controls">
-        <div class="doc-pager">
-          <button type="button" class="doc-btn prev" aria-label="Previous page" disabled>‹</button>
-          <span class="doc-pos" aria-live="polite">–</span>
-          <button type="button" class="doc-btn next" aria-label="Next page" disabled>›</button>
-        </div>
-        ${document.fullscreenEnabled ? '<button type="button" class="doc-btn ghost fs" aria-label="Full screen">⤢ Full screen</button>' : ''}
-        <a class="doc-btn ghost" href="${src}" target="_blank" rel="noopener" aria-label="Open in new tab"><span class="doc-lbl">Open</span>↗</a>
-        <a class="doc-btn download" href="${src}" download="${file}">Download ↓</a>
-      </div>
-    </div>
-    <div class="doc-scroll" tabindex="0" aria-label="${title} pages"><div class="doc-page"></div></div>`;
-  const scroller = el.querySelector('.doc-scroll');
-  const pos = el.querySelector('.doc-pos');
-  const prev = el.querySelector('.prev'), next = el.querySelector('.next');
-  let doc, pages = [], current = 1;
-
-  const fallback = () => {
-    scroller.innerHTML = `<p class="doc-fallback">The preview couldn't load here. <a href="${src}" target="_blank" rel="noopener">Open the PDF</a> or <a href="${src}" download="${file}">download it</a>.</p>`;
-  };
-
-  async function renderPage(box){
-    const n = +box.dataset.page;
-    const page = await doc.getPage(n);
-    const scale = box.clientWidth / page.getViewport({scale:1}).width * Math.min(window.devicePixelRatio || 1, 2);
-    const viewport = page.getViewport({scale});
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.floor(viewport.width);
-    canvas.height = Math.floor(viewport.height);
-    await page.render({canvasContext:canvas.getContext('2d'), viewport}).promise;
-    box.replaceChildren(canvas);
-    box.classList.add('rendered');
-  }
-
-  // Render pages as they approach the visible area of the viewer.
-  const pageObserver = new IntersectionObserver(entries => {
-    for(const e of entries){
-      if(!e.isIntersecting) continue;
-      pageObserver.unobserve(e.target);
-      renderPage(e.target).catch(() => {});
-    }
-  }, {root:scroller, rootMargin:'150% 0px'});
-
-  function showPos(){
-    pos.innerHTML = `<b>${current}</b> / ${pages.length}`;
-    prev.disabled = current <= 1;
-    next.disabled = current >= pages.length;
-  }
-  // While a prev/next jump is scrolling, keep its target page so repeated clicks stack up.
-  let jumpTimer = 0;
-  function updatePos(){
-    if(jumpTimer) return;
-    const mid = scroller.scrollTop + scroller.clientHeight / 3;
-    current = Math.max(1, pages.findLastIndex(p => p.offsetTop <= mid) + 1);
-    showPos();
-  }
-  function goTo(n){
-    current = Math.min(Math.max(n, 1), pages.length);
-    showPos();
-    clearTimeout(jumpTimer);
-    jumpTimer = setTimeout(() => { jumpTimer = 0; updatePos(); }, 700);
-    scroller.scrollTo({top:pages[current - 1].offsetTop - 24, behavior:'smooth'});
-  }
-
-  async function start(){
-    try{
-      const lib = await loadPdfjs();
-      doc = await lib.getDocument({url:src, isEvalSupported:false}).promise;
-      const first = (await doc.getPage(1)).getViewport({scale:1});
-      el.style.setProperty('--page-ratio', `${first.width}/${first.height}`);
-      el.querySelector('.doc-info').textContent = `${doc.numPages} pages · PDF · ${size}`;
-      for(let n = 1; n <= doc.numPages; n++){
-        const box = document.createElement('div');
-        box.className = 'doc-page';
-        box.dataset.page = n;
-        box.setAttribute('aria-label', `Page ${n}`);
-        pages.push(box);
-      }
-      scroller.replaceChildren(...pages);
-      pages.forEach(p => pageObserver.observe(p));
-      updatePos();
-    }catch(err){
-      fallback();
-    }
-  }
-
-  scroller.addEventListener('scroll', () => { if(pages.length) updatePos(); }, {passive:true});
-  prev.addEventListener('click', () => goTo(current - 1));
-  next.addEventListener('click', () => goTo(current + 1));
-  el.querySelector('.fs')?.addEventListener('click', () => {
-    document.fullscreenElement ? document.exitFullscreen() : el.requestFullscreen();
-  });
-
-  // Re-render at the new width when the viewer resizes (window resize, entering full screen).
-  let lastWidth = 0, resizeTimer;
-  new ResizeObserver(() => {
-    const w = scroller.clientWidth;
-    if(!pages.length || Math.abs(w - lastWidth) < 40){ lastWidth ||= w; return; }
-    lastWidth = w;
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => pages.forEach(p => {
-      pageObserver.unobserve(p);
-      pageObserver.observe(p);
-    }), 200);
-  }).observe(scroller);
-
-  const nearby = new IntersectionObserver(entries => {
-    if(entries.some(e => e.isIntersecting)){ nearby.disconnect(); start(); }
-  }, {rootMargin:'600px 0px'});
-  nearby.observe(el);
-}
-document.querySelectorAll('.doc-viewer').forEach(setupDocViewer);
 </script>
 </body>
 </html>
